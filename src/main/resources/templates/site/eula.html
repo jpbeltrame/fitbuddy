@@ -5,10 +5,9 @@
   <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
 </head>
 
-
   <body>
     <section th:replace="fragments/navbar.html :: site-navbar(activePage = ${page})" ></section>
-    <div class="container my-5">
+    <div class="container my-5" th:fragment="eulaBody">
       <h1>End User License Agreement (EULA)</h1>
 
       <div class="col-lg-8 px-0">

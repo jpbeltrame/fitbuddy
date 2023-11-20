@@ -4,71 +4,225 @@
 <head>
     <title>FitBuddy | Create Account</title>
     <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
+    <style>
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .step-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--bs-gray);
+            transition: .4s;
+        }
+        .step-button[aria-expanded="true"] {
+            width: 60px;
+            height: 60px;
+            background-color: var(--bs-primary);
+            color: #fff;
+        }
+        .done {
+            background-color: var(--bs-primary);
+            color: #fff;
+        }
+        .step-item {
+            z-index: 10;
+            text-align: center;
+        }
+
+        /* to customize progress bar */
+        #progress::-webkit-progress-value {
+            background-color: var(--bs-primary);
+            transition: .5s ease;
+        }
+        #progress::-webkit-progress-bar {
+            background-color: var(--bs-gray);
+
+        }
+    </style>
+    <script>
+        const stepButtons = document.querySelectorAll('.step-button');
+        const progress = document.querySelector('#progress');
+
+        Array.from(stepButtons).forEach((button,index) => {
+            button.addEventListener('click', () => {
+                progress.setAttribute('value', index * 100 /(stepButtons.length - 1) );//there are 3 buttons. 2 spaces.
+
+                stepButtons.forEach((item, secindex)=>{
+                    if(index > secindex){
+                        item.classList.add('done');
+                    }
+                    if(index < secindex){
+                        item.classList.remove('done');
+                    }
+                })
+            })
+        })
+    </script>
 </head>
 
 <body>
     <section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})" ></section>
 
-    <div class="container my-5">
-        <h1>Create New Account</h1>
-        <h3>Already registered? <a href="/login">LOGIN</a></h3>
-        <form method="post" action="/signUp">
-            <div class="mb-3">
-                <label for="inputName" class="form-label">Name</label>
-                <input
-                        type="text"
-                        class="form-control"
-                        id="inputName"
-                        aria-describedby="nameHelp"
-                        placeholder="John Doe"
-                        name="name"
-                >
+    <div class="container">
+        <div class="accordion" id="accordionExample">
+            <div class="steps">
+
+                <div class="step-item">
+                    <button class="step-button text-center" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        1
+                    </button>
+                    <div class="step-title">
+                        First Step
+                    </div>
+                </div>
+                <div class="step-item">
+                    <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        2
+                    </button>
+                    <div class="step-title">
+                        Second Step
+                    </div>
+                </div>
+                <div class="step-item">
+                    <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        3
+                    </button>
+                    <div class="step-title">
+                        Third Step
+                    </div>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label for="inputEmail" class="form-label">Email</label>
-                <input type="email"
-                       class="form-control"
-                       id="inputEmail"
-                       aria-describedby="emailHelp"
-                       placeholder="user@email.com"
-                       name="username"
-                >
+            <div class="card">
+                <div  id="headingOne">
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                     data-bs-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="container my-5">
+                            <h1>Create New Account</h1>
+                            <h3>Already registered? <a href="/login">LOGIN</a></h3>
+                            <form method="post" action="/signUp">
+                                <div class="mb-3">
+                                    <label for="inputName" class="form-label">Name</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="inputName"
+                                            aria-describedby="nameHelp"
+                                            placeholder="John Doe"
+                                            name="name"
+                                    >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputEmail" class="form-label">Email</label>
+                                    <input type="email"
+                                           class="form-control"
+                                           id="inputEmail"
+                                           aria-describedby="emailHelp"
+                                           placeholder="user@email.com"
+                                           name="username"
+                                    >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputPassword" class="form-label">Password</label>
+                                    <input type="password"
+                                           class="form-control"
+                                           id="inputPassword"
+                                           placeholder="******"
+                                           name="password"
+                                    >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputBirthDate" class="form-label">Date of Birth</label>
+                                    <input type="date"
+                                           class="form-control"
+                                           id="inputBirthDate"
+                                           name="birthdate"
+                                    >
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Personal Trainer</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">Buddy</label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Sign Up</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="card">
+                <div  id="headingTwo">
 
-            <div class="mb-3">
-                <label for="inputPassword" class="form-label">Password</label>
-                <input type="password"
-                       class="form-control"
-                       id="inputPassword"
-                       placeholder="******"
-                       name="password"
-                >
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="container my-5">
+                        <h1>Card Information</h1>
+                        <form>
+                            <div class="mb-3">
+                                <label for="cardNumber" class="form-label">Card Number</label>
+                                <input type="text" class="form-control" id="cardNumber" aria-describedby="cardHelp" placeholder="xxxx-xxxx-xxxx-xxxx">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="cvNumber" class="form-label">CV Number</label>
+                                <input type="text" class="form-control" id="cvNumber" placeholder="***">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="expireDate" class="form-label">Expiry Date</label>
+                                <input type="date"
+                                       class="form-control"
+                                       id="expireDate"
+                                       name="expireDate"
+                                >
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary" id="subscribeBtn">Subscribe</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
+            <div class="card">
+                <div  id="headingThree">
 
-            <div class="mb-3">
-                <label for="inputBirthDate" class="form-label">Date of Birth</label>
-                <input type="date"
-                       class="form-control"
-                       id="inputBirthDate"
-                       name="birthdate"
-                >
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                     data-bs-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="card-body" th:replace="site/eula.html :: eulaBody">
+
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">Personal Trainer</label>
-            </div>
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                <label class="form-check-label" for="inlineRadio2">Buddy</label>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-
-        </form>
+        </div>
     </div>
+
+
     <footer th:replace="fragments/footer :: footer"></footer>
 </body>
 
