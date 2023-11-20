@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>FitBuddy | Index</title>
+    <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
+</head>
+
+<body>
+<section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})" ></section>
+    <div class="container my-5">
+        <h1>Login</h1>
+        <h3>Sign in to continue</h3>
+
+        <form>             
+            <div class="mb-3">
+                <label for="forgotPassword" class="form-label">Email</label>
+                <input type="email" class="form-control" id="forgotPassword" aria-describedby="emailHelp" placeholder="user@email.com">
+                
+            </div>   
+
+            <div class="mb-3">
+                <label for="exampleInputPasswordLogin" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPasswordLogin" placeholder="******">
+            </div>  
+    
+            <div>
+                <button type="submit" class="btn btn-primary" id="loginPassBTN">Login</button>
+                <a href="/forgotPassword"> Forgot Password </a>
+            </div>              
+          </form>       
+    </div>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>FitBuddy | Create Account</title>
+    <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
+</head>
+
+<body>
+    <section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})" ></section>
+
+
+<div class="container my-5">
+        <h1>Create New Account</h1>
+        <h3>Already registered? <a href="/login.html">LOGIN</a></h3>
+
+    </div>
+
+    <form>
+        <div class="mb-3">
+            <label for="exampleName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleName" aria-describedby="nameHelp" placeholder="John Doe">
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user@email.com">
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="******">
+        </div>       
+        
+        <!--lembrar de corrigir opcoes de calendario-->
+        <div class="mb-3">
+            <label for="exampleDateOfBirth" class="form-label">Date of Birth</label>
+            <select class="form-select" aria-label="Default select example" id="exampleDateOfBirth">
+                <option selected>Month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Day</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Year</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <!--lembrar de corrigir opcoes de calendario-->
+        
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+            <label class="form-check-label" for="inlineRadio1">Personal Trainer</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <label class="form-check-label" for="inlineRadio2">Buddy</label>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+
+        
+      </form>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+</body>
+
+
+</html>

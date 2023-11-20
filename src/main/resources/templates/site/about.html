@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>FitBuddy | About</title>
+    <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
+</head>
+
+<body>
+    <section th:replace="fragments/navbar.html :: site-navbar(activePage = ${page})" ></section>
+    <div class="container my-5">
+        <h1>Fit Buddy Team Members:</h1>
+        <ul class="list-group">
+            <li class="list-group-item">Arthur Oliveira - 300364759</li>
+            <li class="list-group-item">Giordano Fernandes Freire - 300346786</li>
+            <li class="list-group-item">Icaro Novo de Oliveira - 300329100</li>
+            <li class="list-group-item">Joao Beltrame – 300366969</li>
+            <li class="list-group-item">Moises Cavalcante Lino da Silva - 300344810</li>
+          </ul>
+    </div>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>

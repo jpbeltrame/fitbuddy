@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>FitBuddy | Support</title>
+    <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
+</head>
+
+<body>
+    <section th:replace="fragments/navbar.html :: site-navbar(activePage = ${page})" ></section>
+    <div class="container my-5">
+        <h1>Support Page!</h1>
+        <h3>Please before submit a request read the FAQ section below.</h3>
+        <hr class="col-1 my-4" />
+        <h6>Support@emailsupport.com</h6>
+        <hr class="col-1 my-4" />
+        <button type="submit" class="btn btn-primary">Send Email</button>
+    </div>    
+    <div class="container my-5">
+        <h1>Frequently asked questions:</h1>
+        <ul class="list-group">
+            <li class="list-group-item">How to submit a support request?</li>
+            <li class="list-group-item">How to manage my subscription?</li>
+            <li class="list-group-item">How to submit new certificates as a Personal Trainer?</li>
+            <li class="list-group-item">How to update my profile information?</li>
+            <li class="list-group-item">How to manage my buddies and scheduled workout sessions?</li>
+          </ul>
+    </div>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>
