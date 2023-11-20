@@ -1,20 +1,27 @@
 package com.example.fitbuddy.Entities;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDate;
 import java.util.Date;
 
+@Document("users")
 public class User {
-    String username;
-    String password;
-    String id;
-    String name;
-    LocalDate enrollDate;
-    String location;
+
+    @Id
+    private String id;
+    private String username;
+    private String password;
+    private String name;
+    private LocalDate enrollDate;
+    private String location;
 
     public User(String username, String password, String id, String name, LocalDate enrollDate, String location) {
+        super();
+        this.id = id;
         this.username = username;
         this.password = password;
-        this.id = id;
         this.name = name;
         this.enrollDate = enrollDate;
         this.location = location;

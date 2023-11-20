@@ -1,20 +1,42 @@
 package com.example.fitbuddy.Web;
 
+import com.example.fitbuddy.Entities.User;
+import com.example.fitbuddy.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
 @AllArgsConstructor
 public class UserController {
 
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping(path = "/signUp")
     public String IndexPageLoader(Model model) {
         model.addAttribute("page", "createAccount");
         return "app/createAccount";
     }
+
+    @PostMapping(
+            path="/signUp",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public String CreateUserHandler(User user) {
+        System.out.println("teste");
+
+        userRepository.save(user);
+
+        return "app/index";
+    }
+
     @GetMapping(path = "/dashboard")
     public String DashboardPageLoader(Model model) {
         model.addAttribute("page", "dashboard");
