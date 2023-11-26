@@ -29,6 +29,7 @@ public class UserController {
             path="/signUp",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
+
     public String CreateUserHandler(User user) {
         System.out.println("teste");
 
