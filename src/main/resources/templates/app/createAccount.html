@@ -73,8 +73,6 @@
 
 <body>
 <section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})"></section>
-<span th:text = "${errorField}"></span>
-<span th:text = "${errorMessage}"></span>
 <form action="/signUp" method="post">
     <div class="container">
         <div class="accordion" id="accordionExample">
@@ -129,7 +127,8 @@
                                         aria-describedby="nameHelp"
                                         placeholder="John Doe"
                                         name="name"
-                                >
+                                />
+                                <div th:if="${ errorField?.equals('name')}" class="invalid-feedback d-block" th:text="${errorMessage}"></div>
                             </div>
 
                             <div class="mb-3">
@@ -140,7 +139,8 @@
                                        aria-describedby="emailHelp"
                                        placeholder="user@email.com"
                                        name="username"
-                                >
+                                />
+                                <div th:if="${ errorField?.equals('username')}" class="invalid-feedback d-block" th:text="${errorMessage}"></div>
                             </div>
 
                             <div class="mb-3">
@@ -150,7 +150,8 @@
                                        id="inputPassword"
                                        placeholder="******"
                                        name="password"
-                                >
+                                />
+                                <div th:if="${ errorField?.equals('password')}" class="invalid-feedback d-block" th:text="${errorMessage}"></div>
                             </div>
 
                             <div class="mb-3">
