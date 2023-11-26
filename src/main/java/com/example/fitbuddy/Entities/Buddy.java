@@ -11,8 +11,8 @@ public class Buddy extends User {
     ArrayList<Reward> rewards;
     ArrayList<String> buddiesIds;
 
-    public Buddy(String username, String password, String id, String name, LocalDate enrollDate, String location) {
-        super(username, password, id, name, enrollDate, location);
+    public Buddy(String username, String password, String id, String name, LocalDate enrollDate) {
+        super(username, password, id, name, enrollDate);
     }
 
 

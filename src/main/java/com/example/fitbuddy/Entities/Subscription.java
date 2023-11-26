@@ -1,16 +1,23 @@
 package com.example.fitbuddy.Entities;
 
-import java.time.LocalDate;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+@Document("subscriptions")
 public class Subscription {
     String id;
     String userId;
     String type;
     double price;
     LocalDate creditCardToken;
-
     LocalDate subscribedAt;
     int chargeDay;
+
+    public Subscription(String userId, String type, double price) {
+        this.userId = userId;
+        this.type = type;
+        this.price = price;
+    }
 
     public String getId() {
         return id;

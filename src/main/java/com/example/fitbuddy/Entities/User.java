@@ -15,16 +15,36 @@ public class User {
     private String password;
     private String name;
     private LocalDate enrollDate;
+    private Date birthDate;
     private String location;
+    private String subscriptionType;
 
-    public User(String username, String password, String id, String name, LocalDate enrollDate, String location) {
-        super();
+    public User(String id, String username, String password, String name, LocalDate enrollDate, Date birthDate, String location) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
         this.enrollDate = enrollDate;
+        this.birthDate = birthDate;
         this.location = location;
+    }
+
+    public User(String username, String password, String id, String name, LocalDate enrollDate) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.enrollDate = enrollDate;
+    }
+
+
+    public User(String username, String password, String name, Date birthDate, String subscriptionType) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.subscriptionType =subscriptionType;
+
     }
 
     public LocalDate getEnrollDate() {
@@ -33,6 +53,14 @@ public class User {
 
     public void setEnrollDate(LocalDate enrollDate) {
         this.enrollDate = enrollDate;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getUsername() {
@@ -74,5 +102,13 @@ public class User {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getSubscriptionType() {
+        return subscriptionType;
+    }
+
+    public void setSubscriptionType(String subscriptionType) {
+        this.subscriptionType = subscriptionType;
     }
 }
