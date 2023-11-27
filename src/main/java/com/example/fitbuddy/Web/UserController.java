@@ -2,12 +2,13 @@ package com.example.fitbuddy.Web;
 
 import com.example.fitbuddy.Entities.SignupForm;
 import com.example.fitbuddy.Entities.Subscription;
-import com.example.fitbuddy.Entities.User;
+import com.example.fitbuddy.Entities.UserFitbuddy;
 import com.example.fitbuddy.Repositories.SubscriptionRepository;
 import com.example.fitbuddy.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,17 +20,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
-    SubscriptionRepository subscriptionRepository;
+    private UserRepository userRepository;
+    private SubscriptionRepository subscriptionRepository;
+    private PasswordEncoder passwordEncoder;
 
-    @GetMapping(path = "/signUp")
+    @GetMapping(path = "app/signUp")
     public String IndexPageLoader(Model model) {
         model.addAttribute("page", "createAccount");
         return "app/createAccount";
     }
 
     @PostMapping(
-            path = "/signUp",
+            path = "app/signUp",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
     public String CreateUserHandler(SignupForm form, Model model) {
@@ -61,39 +63,41 @@ public class UserController {
             return "app/createAccount";
         }
 
-        User user = userRepository.save(new User(form.username, form.password,form.name,form.birthDate,form.subscriptionType ));
-        subscriptionRepository.save( new Subscription(user.getId(), form.subscriptionType,10));
+        String password = passwordEncoder.encode(form.password);
+
+        UserFitbuddy userFitbuddy = userRepository.save(new UserFitbuddy(form.username, password,form.name,form.birthDate,form.subscriptionType ));
+        subscriptionRepository.save( new Subscription(userFitbuddy.getId(), form.subscriptionType,10));
 
         return "app/index";
     }
 
-    @GetMapping(path = "/dashboard")
+    @GetMapping(path = "app/dashboard")
     public String DashboardPageLoader(Model model) {
         model.addAttribute("page", "dashboard");
         return "app/index";
     }
-    @GetMapping(path = "/findABuddy")
+    @GetMapping(path = "app/findABuddy")
     public String FindABuddyPageLoader(Model model) {
         model.addAttribute("page", "findABuddy");
         return "app/findABuddy";
     }
-    @GetMapping(path = "/forgotPassword")
+    @GetMapping(path = "app/forgotPassword")
     public String ForgotPasswordPageLoader(Model model) {
         model.addAttribute("page", "forgotPassword");
         return "app/forgotPassword";
     }
-    @GetMapping(path = "/login")
+    @GetMapping(path = "app/login")
     public String LoginPageLoader(Model model) {
         model.addAttribute("page", "login");
         return "app/login";
     }
-    @GetMapping(path = "/profile")
+    @GetMapping(path = "app/profile")
     public String ProfilePageLoader(Model model) {
         model.addAttribute("page", "profile");
         return "app/profile";
     }
 
-    @GetMapping(path = "/settings")
+    @GetMapping(path = "app/settings")
     public String SettingsPageLoader(Model model) {
         model.addAttribute("page", "settings");
         return "app/profile";

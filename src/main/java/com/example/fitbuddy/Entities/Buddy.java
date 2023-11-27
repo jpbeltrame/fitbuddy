@@ -2,9 +2,8 @@ package com.example.fitbuddy.Entities;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Buddy extends User {
+public class Buddy extends UserFitbuddy {
 
     String personalId;
     double score;

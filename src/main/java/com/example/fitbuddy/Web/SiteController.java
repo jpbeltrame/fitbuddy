@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class SiteController {
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "site/")
     public String IndexPageLoader(Model model) {
         model.addAttribute("page", "main");
         return "site/main";
     }
 
-    @GetMapping(path = "/about")
+    @GetMapping(path = "site/about")
     public String AboutPageLoader(Model model) {
         model.addAttribute("page", "about");
         return "site/about";
     }
 
-    @GetMapping(path = "/support")
+    @GetMapping(path = "site/support")
     public String SupportPageLoader(Model model) {
         model.addAttribute("page", "support");
         return "site/support";
     }
 
-    @GetMapping(path = "/eula")
+    @GetMapping(path = "site/eula")
     public String EULAPageLoader(Model model) {
         model.addAttribute("page", "eula");
         return "site/eula";
