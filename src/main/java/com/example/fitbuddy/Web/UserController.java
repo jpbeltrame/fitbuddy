@@ -1,8 +1,6 @@
 package com.example.fitbuddy.Web;
 
-import com.example.fitbuddy.Entities.SignupForm;
-import com.example.fitbuddy.Entities.Subscription;
-import com.example.fitbuddy.Entities.User;
+import com.example.fitbuddy.Entities.*;
 import com.example.fitbuddy.Repositories.SubscriptionRepository;
 import com.example.fitbuddy.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -77,18 +75,6 @@ public class UserController {
         System.out.println(user.getId());
         System.out.println(userCreated.getId());
 
-        /**
-         validar os dados ***************************OK
-         1.1. se ok continua
-         2.criar usuario*****************OK
-         3.Criar subscription repository e salvar na base *******************OK
-         4.retornar pagina de sucess
-         1.2. se nao
-         5.retorna para create account com parametro obj de error
-         6.errorField: password
-         7.errorMsg: Password must have 6 characters
-         8.pagina de create account tem que saber ler error
-         */
         Subscription subscription = new Subscription(userCreated.getId(), form.subscriptionType,10);
         subscriptionRepository.save(subscription);
         return "app/index";
@@ -103,6 +89,42 @@ public class UserController {
     @GetMapping(path = "/findABuddy")
     public String FindABuddyPageLoader(Model model) {
         model.addAttribute("page", "findABuddy");
+        return "app/findABuddy";
+    }
+    @PostMapping(
+            path = "/findABuddy",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public String FindBuddyHandler(FindABuddyForm form, Model model) {
+        System.out.println(form.trainingDays);
+        System.out.println(form.startSession);
+        System.out.println(form.endSession);
+
+        String errorField = "";
+        String errorMessage = "";
+
+        if (form.trainingDays.isEmpty()) {
+            errorField = "trainingDays";
+            errorMessage ="Please select at least one training day.";
+        }
+
+        if (form.startSession.isEmpty()) {
+            errorField = "startSession";
+            errorMessage ="Please select the time for start session.";
+        }
+
+        if (form.endSession.isEmpty()) {
+            errorField = "endSession";
+            errorMessage ="Please select the time for end session.";
+        }
+
+        if (!errorField.isEmpty()){
+            model.addAttribute("page","findABuddy");
+            model.addAttribute("errorField",errorField);
+            model.addAttribute("errorMessage",errorMessage);
+            return "app/findABuddy";
+        }
+
         return "app/findABuddy";
     }
 
