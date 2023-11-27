@@ -12,9 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.sql.SQLOutput;
 
 
 @Controller
@@ -36,12 +33,6 @@ public class UserController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
     public String CreateUserHandler(SignupForm form, Model model) {
-        System.out.println(form.name);
-        System.out.println(form.username);
-        System.out.println(form.password);
-        System.out.println(form.birthDate);
-        System.out.println(form.subscriptionType);
-
         String errorField = "";
         String errorMessage = "";
 
@@ -70,27 +61,9 @@ public class UserController {
             return "app/createAccount";
         }
 
+        User user = userRepository.save(new User(form.username, form.password,form.name,form.birthDate,form.subscriptionType ));
+        subscriptionRepository.save( new Subscription(user.getId(), form.subscriptionType,10));
 
-        User user = new User(form.username, form.password,form.name,form.birthDate,form.subscriptionType );
-        User userCreated = userRepository.save(user);
-
-        System.out.println(user.getId());
-        System.out.println(userCreated.getId());
-
-        /**
-         validar os dados ***************************OK
-         1.1. se ok continua
-         2.criar usuario*****************OK
-         3.Criar subscription repository e salvar na base *******************OK
-         4.retornar pagina de sucess
-         1.2. se nao
-         5.retorna para create account com parametro obj de error
-         6.errorField: password
-         7.errorMsg: Password must have 6 characters
-         8.pagina de create account tem que saber ler error
-         */
-        Subscription subscription = new Subscription(userCreated.getId(), form.subscriptionType,10);
-        subscriptionRepository.save(subscription);
         return "app/index";
     }
 
@@ -99,25 +72,21 @@ public class UserController {
         model.addAttribute("page", "dashboard");
         return "app/index";
     }
-
     @GetMapping(path = "/findABuddy")
     public String FindABuddyPageLoader(Model model) {
         model.addAttribute("page", "findABuddy");
         return "app/findABuddy";
     }
-
     @GetMapping(path = "/forgotPassword")
     public String ForgotPasswordPageLoader(Model model) {
         model.addAttribute("page", "forgotPassword");
         return "app/forgotPassword";
     }
-
     @GetMapping(path = "/login")
     public String LoginPageLoader(Model model) {
         model.addAttribute("page", "login");
         return "app/login";
     }
-
     @GetMapping(path = "/profile")
     public String ProfilePageLoader(Model model) {
         model.addAttribute("page", "profile");
