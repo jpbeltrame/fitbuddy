@@ -22,20 +22,11 @@ public class UserFitbuddy {
     private String username;
     private String password;
     private String name;
+    private String city;
     private LocalDate enrollDate;
     private Date birthDate;
     private String location;
     private String subscriptionType;
-
-    public UserFitbuddy(String id, String username, String password, String name, LocalDate enrollDate, Date birthDate, String location) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.enrollDate = enrollDate;
-        this.birthDate = birthDate;
-        this.location = location;
-    }
 
     public UserFitbuddy(String username, String password, String id, String name, LocalDate enrollDate) {
         this.id = id;

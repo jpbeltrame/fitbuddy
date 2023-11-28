@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -57,6 +58,10 @@ public class UserController {
             errorField = "username";
             errorMessage = "Please enter a valid e-mail.";
         }
+        if (form.city.isEmpty()) {
+            errorField = "city";
+            errorMessage ="Please insert your city.";
+        }
         if (!form.subscriptionType.equals("personalTrainer") && !form.subscriptionType.equals("buddy")) {
             errorField = "Subscription Type";
             errorMessage =  "Please don't touch our html";
@@ -71,7 +76,14 @@ public class UserController {
 
         String password = passwordEncoder.encode(form.password);
 
-        UserFitbuddy userFitbuddy = userRepository.save(new UserFitbuddy(form.username, password,form.name,form.birthDate,form.subscriptionType ));
+        UserFitbuddy userFitbuddy = new UserFitbuddy();
+        userFitbuddy.setName(form.name);
+        userFitbuddy.setPassword(password);
+        userFitbuddy.setCity(form.city);
+        userFitbuddy.setBirthDate(form.birthDate);
+        userFitbuddy.setSubscriptionType(form.subscriptionType);
+        userFitbuddy.setUsername(form.username);
+        userFitbuddy = userRepository.save(userFitbuddy);
         subscriptionRepository.save( new Subscription(userFitbuddy.getId(), form.subscriptionType,10));
 
         return "app/index";
@@ -156,5 +168,4 @@ public class UserController {
 
         return "app/profile";
     }
-
 }
