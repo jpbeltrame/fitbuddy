@@ -43,7 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                             .collect(Collectors.toList())
             );
         } else {
-         throw new UsernameNotFoundException("Invalid credentials");
+            throw new UsernameNotFoundException("Invalid credentials");
         }
     }
 }

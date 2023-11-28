@@ -44,6 +44,9 @@ public class WebSecurityConfig {
                                 "/app/login",
                                 "/app/fogotpassword"
                         ).permitAll()
+                        .requestMatchers(
+                                "/admin/**"
+                        ).hasRole("admin")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
