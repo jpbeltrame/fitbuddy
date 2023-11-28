@@ -1,4 +1,4 @@
-package com.example.fitbuddy.Entities;
+package com.example.fitbuddy.DTO;
 
 import java.time.LocalDate;
 import java.util.Date;

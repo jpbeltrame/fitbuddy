@@ -1,9 +1,9 @@
 package com.example.fitbuddy.Web;
 
-import com.example.fitbuddy.Entities.SignupForm;
+import com.example.fitbuddy.DTO.SignupForm;
 import com.example.fitbuddy.Entities.Subscription;
 import com.example.fitbuddy.Entities.UserFitbuddy;
-import com.example.fitbuddy.Entities.FindABuddyForm;
+import com.example.fitbuddy.DTO.FindABuddyForm;
 import com.example.fitbuddy.Repositories.SubscriptionRepository;
 import com.example.fitbuddy.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -168,4 +168,5 @@ public class UserController {
 
         return "app/profile";
     }
+
 }

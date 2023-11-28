@@ -1,5 +1,5 @@
 package com.example.fitbuddy.Repositories;
-import com.example.fitbuddy.Entities.SignupForm;
+import com.example.fitbuddy.DTO.SignupForm;
 import com.example.fitbuddy.Entities.Subscription;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

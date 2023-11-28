@@ -19,8 +19,6 @@ import static org.apache.coyote.http11.Constants.a;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
-
     private final UserRepository userRepository;
 
     @Autowired

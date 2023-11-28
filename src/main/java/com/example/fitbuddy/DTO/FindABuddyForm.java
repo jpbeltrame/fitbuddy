@@ -1,4 +1,4 @@
-package com.example.fitbuddy.Entities;
+package com.example.fitbuddy.DTO;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -7,7 +7,6 @@ import java.util.List;
 public class FindABuddyForm {
     public String gender;
     public List<String> trainingDays;
-    //vkhbevhev
     public String objective;
     public String startSession;
     public String endSession;
