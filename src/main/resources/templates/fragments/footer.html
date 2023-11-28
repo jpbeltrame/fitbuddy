@@ -1,13 +1,15 @@
 
 <footer class="py-3 my-4" th:fragment="footer">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="site/" class="nav-link px-2 text-body-secondary">Home</a></li>
+        <li class="nav-item"><a th:href="@{/site/}" class="nav-link px-2 text-body-secondary">Home</a></li>
         <li class="nav-item"><span class=" nav-link px-2 text-body-secondary"> | </span></li>
-        <li class="nav-item"><a href="site/support" class="nav-link px-2 text-body-secondary">Support</a></li>
+        <li class="nav-item"><a th:href="@{/site/support}" class="nav-link px-2 text-body-secondary">Support</a></li>
         <li class="nav-item"><span class=" nav-link px-2 text-body-secondary"> | </span></li>
-        <li class="nav-item"><a href="site/about" class="nav-link px-2 text-body-secondary">About</a></li>
+        <li class="nav-item"><a th:href="@{/site/about}" class="nav-link px-2 text-body-secondary">About</a></li>
         <li class="nav-item"><span class=" nav-link px-2 text-body-secondary"> | </span></li>
-        <li class="nav-item"><a href="site/eula" class="nav-link px-2 text-body-secondary">Terms And Agreement</a></li>
+        <li class="nav-item"><a th:href="@{/site/eula}" class="nav-link px-2 text-body-secondary">Terms And Agreement</a></li>
     </ul>
     <p class="text-center text-body-secondary">© 2023 FitBuddy, Inc</p>
 </footer>
+
+
