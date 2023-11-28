@@ -72,7 +72,7 @@
 </head>
 
 <body>
-<section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})"></section>
+<section th:replace="fragments/navbar.html :: site-navbar(activePage = ${page})"></section>
 <form action="/signUp" method="post">
     <div class="container">
         <div class="accordion" id="accordionExample">
@@ -137,7 +137,7 @@
                                        class="form-control"
                                        id="inputEmail"
                                        aria-describedby="emailHelp"
-                                       placeholder="user@email.com"
+                                       placeholder="userFitbuddy@email.com"
                                        name="username"
                                 />
                                 <div th:if="${ errorField?.equals('username')}" class="invalid-feedback d-block" th:text="${errorMessage}"></div>
