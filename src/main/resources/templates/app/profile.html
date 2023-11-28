@@ -39,7 +39,8 @@
                             th:text="${user.getName()}"></span></p>
                     <p class="card-text" id="profileEmail"><strong>Email:</strong> <span
                             th:text="${user.getUsername()}"></span></p>
-                    <p class="card-text" id="profileCity"><strong>City:</strong> Your City</p>
+                    <p class="card-text" id="profileCity"><strong>City:</strong>
+                        <span th:text="${user.getCity()}"></span></p>
                     <p class="card-text"><strong>Daily Progress:</strong></p>
 <!--                    <img src="starsImg.jpg" class="card-img-stars" alt="Stars Daily">-->
                 </div>

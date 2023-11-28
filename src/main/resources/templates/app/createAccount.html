@@ -155,6 +155,19 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="inputCity" class="form-label">City</label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inputCity"
+                                        aria-describedby="nameHelp"
+                                        placeholder="Vancouver"
+                                        name="city"
+                                />
+                                <div th:if="${ errorField?.equals('city')}" class="invalid-feedback d-block" th:text="${errorMessage}"></div>
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="inputBirthDate" class="form-label">Date of Birth</label>
                                 <input type="date"
                                        class="form-control"
