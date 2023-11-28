@@ -7,85 +7,13 @@
 <body>
 <section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})" ></section>
 
-<form action="/findABuddy" method="post">
-    <div class="container my-5">
-        <h1>Find a Buddy</h1>
 
-        <div class="col">
-            <select class="form-select" id="genderFilter">
-                <option selected>Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
+<div class="container my-5">
+    <h1>Find a Buddy</h1>
 
-        <div class="col">
-            <div id="weekDayFilter">
+    <form th:replace="fragments/forms.html :: preferencesForm(action='/app/preferences')"></form>
 
-                <label>Training Days Options:</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="mondayCheckbox" value="Monday">
-                    <label class="form-check-label" for="mondayCheckbox">Monday</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="tuesdayCheckbox" value="Tuesday">
-                    <label class="form-check-label" for="tuesdayCheckbox">Tuesday</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="wednesdayCheckbox" value="Wednesday">
-                    <label class="form-check-label" for="wednesdayCheckbox">Wednesday</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="thursdayCheckbox" value="Thursday">
-                    <label class="form-check-label" for="thursdayCheckbox">Thursday</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="fridayCheckbox" value="Friday">
-                    <label class="form-check-label" for="fridayCheckbox">Friday</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <select class="form-select" id="objectiveFilter">
-                <option selected>Select Objective</option>
-                <option value="functional">FUNCTIONAL TRAINING</option>
-                <option value="mobility">MOBILITY TRAINING</option>
-                <option value="strength">STRENGTH TRAINING</option>
-                <option value="balance">BALANCE TRAINING</option>
-                <option value="stretch">STRETCHING</option>
-                <option value="agility">AGILITY TRAINING</option>
-                <option value="other">OTHER</option>
-            </select>
-        </div>
-
-        <div class="col">
-            <div id="timeFilter">
-                <label>Choose a time for your training session:</label>
-
-                <input class="form-control" type="time" id="startSession" name="startSession" min="09:00" max="18:00" required />
-                <small>Start</small>
-                <input class="form-control" type="time" id="endSession" name="endSession" min="09:00" max="18:00" required />
-                <small>End</small>
-            </div>
-        </div>
-
-        <div class="form-check form-switch mb-4">
-            <input class="form-check-input" type="checkbox" id="toggleTrainers">
-            <label class="form-check-label" for="toggleTrainers">Show Personal Trainers</label>
-        </div>
-
-        <div id="buddyList" class="list-group">
-<!--            kfbkevejbvebnl-->
-            <!-- Buddies connected with the user will be displayed here as list-group items -->
-        </div>
-    </div>
-</form>
+</div>
 
     <footer th:replace="fragments/footer :: footer"></footer>
 </body>
