@@ -99,6 +99,7 @@ public class UserController {
         System.out.println(form.trainingDays);
         System.out.println(form.startSession);
         System.out.println(form.endSession);
+        //fljvejvln
 
         String errorField = "";
         String errorMessage = "";

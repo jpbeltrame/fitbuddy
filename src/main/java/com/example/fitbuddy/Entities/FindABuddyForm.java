@@ -7,6 +7,7 @@ import java.util.List;
 public class FindABuddyForm {
     public String gender;
     public List<String> trainingDays;
+    //vkhbevhev
     public String objective;
     public String startSession;
     public String endSession;
