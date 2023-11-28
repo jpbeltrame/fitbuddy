@@ -9,11 +9,16 @@ import com.example.fitbuddy.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.security.Principal;
 
 
 @Controller
@@ -24,6 +29,7 @@ public class UserController {
     private UserRepository userRepository;
     private SubscriptionRepository subscriptionRepository;
     private PasswordEncoder passwordEncoder;
+    private UserDetailsService userDetailsService;
 
     @GetMapping(path = "app/signUp")
     public String IndexPageLoader(Model model) {
@@ -38,7 +44,6 @@ public class UserController {
     public String CreateUserHandler(SignupForm form, Model model) {
         String errorField = "";
         String errorMessage = "";
-
 
         if (form.name.isEmpty()) {
             errorField = "name";
@@ -131,14 +136,24 @@ public class UserController {
         return "app/login";
     }
     @GetMapping(path = "app/profile")
-    public String ProfilePageLoader(Model model) {
+    public String ProfilePageLoader(Model model, Authentication authentication) {
         model.addAttribute("page", "profile");
+        String username = authentication.getName();
+
+        UserFitbuddy user = userRepository.findUserByEmail(username);
+
+        model.addAttribute("page","profile");
+        model.addAttribute("user", user);
+
         return "app/profile";
     }
 
     @GetMapping(path = "app/settings")
     public String SettingsPageLoader(Model model) {
         model.addAttribute("page", "settings");
+
+
+
         return "app/profile";
     }
 

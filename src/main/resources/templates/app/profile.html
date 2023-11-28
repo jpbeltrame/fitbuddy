@@ -7,63 +7,65 @@
 </head>
 
 <body>
-<section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})" ></section>
+<section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})"></section>
 
-    <div class="container my-5">
-        <h1 class="text-center">Welcome User, </h1>
-        <br/>
-        <div class="row">
-            <!-- Coluna da Esquerda - Settings -->
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Settings</h2>
-                        <ul class="list-group" id="settingsList">
-                            <li class="list-group-item" id="settingsProfile">Profile</li>
-                            <li class="list-group-item" id="settingsSupport">Support</li>
-                            <li class="list-group-item" id="settingsSubscriptions">Subscriptions</li>
-                            <li class="list-group-item" id="settingsLogoff">Logoff</li>
-                        </ul>
-                    </div>
+<div class="container my-5">
+    <h1 class="text-center">Welcome, <span th:text="${user.getName()}"></span></h1>
+    <br/>
+    <div class="row">
+        <!-- Coluna da Esquerda - Settings -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Settings</h2>
+                    <ul class="list-group" id="settingsList">
+                        <li class="list-group-item" id="settingsProfile">Profile</li>
+                        <li class="list-group-item" id="settingsSupport">Support</li>
+                        <li class="list-group-item" id="settingsSubscriptions">Subscriptions</li>
+                        <li class="list-group-item" id="settingsLogoff">Logoff</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <!-- Coluna do Meio - Detalhes do Perfil -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="image.jpg" class="card-img-top" alt="ProfileImage">
-                    <p id="updatePhoto">Update your Photo</p>
-                    <div class="card-body">
-                        <h2 class="card-title">Profile Details</h2>
-                        <p class="card-text" id="profileName"><strong>Name:</strong> Your Name</p>
-                        <p class="card-text" id="profileEmail"><strong>Email:</strong> email@email.com</p>
-                        <p class="card-text" id="profileCity"><strong>City:</strong> Your City</p>
-                        <p class="card-text"><strong>Daily Progress:</strong></p>
-                        <img src="starsImg.jpg" class="card-img-stars" alt="Stars Daily">
-                    </div>
+        <!-- Coluna do Meio - Detalhes do Perfil -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="image.jpg" class="card-img-top" alt="ProfileImage">
+                <p id="updatePhoto">Update your Photo</p>
+                <div class="card-body">
+                    <h2 class="card-title">Profile Details</h2>
+                    <p class="card-text" id="profileName"><strong>Name:</strong> <span
+                            th:text="${user.getName()}"></span></p>
+                    <p class="card-text" id="profileEmail"><strong>Email:</strong> <span
+                            th:text="${user.getUsername()}"></span></p>
+                    <p class="card-text" id="profileCity"><strong>City:</strong> Your City</p>
+                    <p class="card-text"><strong>Daily Progress:</strong></p>
+                    <img src="starsImg.jpg" class="card-img-stars" alt="Stars Daily">
                 </div>
             </div>
+        </div>
 
-            <!-- Coluna da Direita - Lista de Buddies -->
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Buddies</h2>
-                        <ul class="list-group" id="buddiesList">
-                            <li class="list-group-item">Buddy 1</li>
-                            <li class="list-group-item">Buddy 2</li>
-                            <li class="list-group-item">Buddy 3</li>
-                            <!-- Adicione mais buddies conforme necessário -->
-                        </ul>
-                        <br>
-                        <p class="card-text"><strong>Badges Owned:</strong></p>
-                        <img src="badgesImg.jpg" class="card-img-badges" alt="badges">
-                    </div>
+        <!-- Coluna da Direita - Lista de Buddies -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Buddies</h2>
+                    <ul class="list-group" id="buddiesList">
+                        <li class="list-group-item">Buddy 1</li>
+                        <li class="list-group-item">Buddy 2</li>
+                        <li class="list-group-item">Buddy 3</li>
+                        <!-- Adicione mais buddies conforme necessário -->
+                    </ul>
+                    <br>
+                    <p class="card-text"><strong>Badges Owned:</strong></p>
+                    <img src="badgesImg.jpg" class="card-img-badges" alt="badges">
                 </div>
             </div>
         </div>
     </div>
-    <footer th:replace="fragments/footer :: footer"></footer>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 
 </html>
