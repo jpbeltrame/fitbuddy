@@ -40,6 +40,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(
                                 "/",
+                                "/css/**",
+                                "/assets/**",
                                 "/site/**",
                                 "/app/signUp",
                                 "/app/login",
@@ -48,7 +50,7 @@ public class WebSecurityConfig {
                         .requestMatchers(
                                 "/admin/**"
                         ).hasRole("admin")
-                        .anyRequest().authenticated()
+                        .anyRequest().denyAll()
                 )
                 .formLogin((form) -> form
                         .loginPage("/app/login")

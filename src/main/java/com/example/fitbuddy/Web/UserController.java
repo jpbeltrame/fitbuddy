@@ -110,25 +110,20 @@ public class UserController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
     public String FindBuddyHandler(FindABuddyForm form, Model model) {
-        System.out.println(form.trainingDays);
-        System.out.println(form.startSession);
-        System.out.println(form.endSession);
-        //fljvejvln
-
         String errorField = "";
         String errorMessage = "";
 
-        if (form.trainingDays.isEmpty()) {
+        if (form.getTrainingDays().isEmpty()) {
             errorField = "trainingDays";
             errorMessage ="Please select at least one training day.";
         }
 
-        if (form.startSession.isEmpty()) {
+        if (form.getStartSession().isEmpty()) {
             errorField = "startSession";
             errorMessage ="Please select the time for start session.";
         }
 
-        if (form.endSession.isEmpty()) {
+        if (form.getEndSession().isEmpty()) {
             errorField = "endSession";
             errorMessage ="Please select the time for end session.";
         }

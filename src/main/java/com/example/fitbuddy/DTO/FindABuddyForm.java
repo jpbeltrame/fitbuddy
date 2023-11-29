@@ -1,18 +1,23 @@
 package com.example.fitbuddy.DTO;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class FindABuddyForm {
-    public String gender;
-    public List<String> trainingDays;
-    public String objective;
-    public String startSession;
-    public String endSession;
-    public FindABuddyForm(List<String> trainingDays, String startSession, String endSession) {
-        this.trainingDays = trainingDays;
-        this.startSession = startSession;
-        this.endSession = endSession;
-    }
+    private String gender;
+    private List<String> trainingDays;
+    private String objective;
+    private String startSession;
+    private String endSession;
 }
