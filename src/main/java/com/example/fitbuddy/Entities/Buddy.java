@@ -4,15 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.ArrayList;
+import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Buddy extends UserFitbuddy {
+public class Buddy {
 
+    private String userId;
     private String personalId;
     private double score;
     private ArrayList<Reward> rewards;

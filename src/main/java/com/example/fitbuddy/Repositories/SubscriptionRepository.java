@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 public interface SubscriptionRepository extends MongoRepository<Subscription, String> {
-    @Query("{userId:  '?0'}")
+    @Query("{userId:  '?0'  }")
     SignupForm findUserByUserId(String userId);
 }

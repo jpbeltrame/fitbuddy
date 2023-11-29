@@ -6,25 +6,21 @@
 </head>
 
 <body>
-
-<section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})"></section>
-<div class="container my-5">
-
-    <!--      th:if="${user.getPreferences().toString().equals('')}">-->
-    <div>
-        <h1>Welcome <span class="text-decoration-underline" th:text="${user.getName()}"></span> Let's complete your
-            profile!</h1>
-        <h5 class="mb-4">Complete your training preferences, so we can help you find buddies!</h5>
-        <form
-                th:replace="fragments/forms :: preferencesForm(
-                action='/app/updatePrefereces',
-                showGenderPrefix=true
-            )"
-        ></form>
+    <section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})"></section>
+    <div class="container my-5">
+        <div th:if="${user.getPreferences()} == null">
+            <h1>Welcome <span class="text-decoration-underline" th:text="${user.getName()}"></span> Let's complete your
+                profile!</h1>
+            <h5 class="mb-4">Complete your training preferences, so we can help you find buddies!</h5>
+            <form
+                    th:replace="fragments/forms :: preferencesForm(
+                    action='/app/updatePrefereces',
+                    showGenderPrefix=true
+                )"
+            ></form>
+        </div>
     </div>
-</div>
-
-<footer th:replace="fragments/footer :: footer"></footer>
+    <footer th:replace="fragments/footer :: footer"></footer>
 </body>
 
 </html>

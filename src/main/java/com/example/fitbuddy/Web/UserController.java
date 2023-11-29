@@ -8,8 +8,6 @@ import com.example.fitbuddy.Entities.UserPreferences;
 import com.example.fitbuddy.Repositories.SubscriptionRepository;
 import com.example.fitbuddy.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -148,6 +146,8 @@ public class UserController {
         userPreferences.setEndSession(form.getEndSession());
 
         user.setPreferences(userPreferences);
+
+        userRepository.save(user);
 
         return "redirect:/app/dashboard";
     };
