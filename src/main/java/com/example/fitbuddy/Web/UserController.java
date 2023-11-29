@@ -7,6 +7,8 @@ import com.example.fitbuddy.DTO.FindABuddyForm;
 import com.example.fitbuddy.Repositories.SubscriptionRepository;
 import com.example.fitbuddy.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -104,38 +106,41 @@ public class UserController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
     public String FindBuddyHandler(FindABuddyForm form, Model model) {
-        System.out.println(form.trainingDays);
-        System.out.println(form.startSession);
-        System.out.println(form.endSession);
+        System.out.println("---------Trainning days: " + form.trainingDays);
+        System.out.println("---------Start session: " + form.startSession);
+        System.out.println("---------End session: " + form.endSession);
         //fljvejvln
 
         String errorField = "";
         String errorMessage = "";
 
-        if (form.trainingDays.isEmpty()) {
-            errorField = "trainingDays";
-            errorMessage ="Please select at least one training day.";
-        }
-
-        if (form.startSession.isEmpty()) {
-            errorField = "startSession";
-            errorMessage ="Please select the time for start session.";
-        }
-
-        if (form.endSession.isEmpty()) {
-            errorField = "endSession";
-            errorMessage ="Please select the time for end session.";
-        }
-
-        if (!errorField.isEmpty()){
-            model.addAttribute("page","findABuddy");
-            model.addAttribute("errorField",errorField);
-            model.addAttribute("errorMessage",errorMessage);
-            return "app/findABuddy";
-        }
+        subscriptionRepository.findAll().forEach(userFitbuddy -> System.out.println("----------User ID: " + userFitbuddy.getUserId()));
 
         return "app/findABuddy";
     }
+
+//        if (form.trainingDays.isEmpty()) {
+//            errorField = "trainingDays";
+//            errorMessage ="Please select at least one training day.";
+//        }
+//
+//        if (form.startSession.isEmpty()) {
+//            errorField = "startSession";
+//            errorMessage ="Please select the time for start session.";
+//        }
+//
+//        if (form.endSession.isEmpty()) {
+//            errorField = "endSession";
+//            errorMessage ="Please select the time for end session.";
+//        }
+//
+//        if (!errorField.isEmpty()){
+//            model.addAttribute("page","findABuddy");
+//            model.addAttribute("errorField",errorField);
+//            model.addAttribute("errorMessage",errorMessage);
+//            return "app/findABuddy";
+//        }
+
 
     @GetMapping(path = "app/forgotPassword")
     public String ForgotPasswordPageLoader(Model model) {
