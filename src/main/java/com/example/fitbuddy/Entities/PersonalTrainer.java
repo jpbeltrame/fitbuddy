@@ -1,13 +1,14 @@
 package com.example.fitbuddy.Entities;
 
-public class PersonalTrainer {
-    String specialty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class PersonalTrainer extends UserFitbuddy{
+    private String specialty;
 }

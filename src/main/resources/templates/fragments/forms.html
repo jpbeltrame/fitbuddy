@@ -1,47 +1,45 @@
-<form th:fragment="preferencesForm(action)" th:action="${action}" th:method="'POST'">
-
+<form th:fragment="preferencesForm(action, showGenderPrefix)" th:action="${action}" th:method="'POST'">
+    <div class="row my-2">
         <div class="col">
-            <select class="form-select" id="genderFilter">
-                <option selected>Select Gender</option>
+            <label for="genderFilter"><span th:if="${showGenderPrefix}">Your </span>Gender:</label>
+            <select name="gender" class="form-select" id="genderFilter">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
             </select>
         </div>
+    </div>
 
+    <div class="row my-3">
         <div class="col">
-            <div id="weekDayFilter">
-
-                <label>Training Days Options:</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="mondayCheckbox" value="Monday">
-                    <label class="form-check-label" for="mondayCheckbox">Monday</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="tuesdayCheckbox" value="Tuesday">
-                    <label class="form-check-label" for="tuesdayCheckbox">Tuesday</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="wednesdayCheckbox" value="Wednesday">
-                    <label class="form-check-label" for="wednesdayCheckbox">Wednesday</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="thursdayCheckbox" value="Thursday">
-                    <label class="form-check-label" for="thursdayCheckbox">Thursday</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="fridayCheckbox" value="Friday">
-                    <label class="form-check-label" for="fridayCheckbox">Friday</label>
-                </div>
+            <label>Training Days Options:</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="mondayCheckbox" value="monday">
+                <label class="form-check-label" for="mondayCheckbox">Monday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="tuesdayCheckbox" value="tuesday">
+                <label class="form-check-label" for="tuesdayCheckbox">Tuesday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="wednesdayCheckbox" value="wednesday">
+                <label class="form-check-label" for="wednesdayCheckbox">Wednesday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="thursdayCheckbox" value="thursday">
+                <label class="form-check-label" for="thursdayCheckbox">Thursday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="fridayCheckbox" value="friday">
+                <label class="form-check-label" for="fridayCheckbox">Friday</label>
             </div>
         </div>
+    </div>
 
+    <div class="row my-3">
         <div class="col">
-            <select class="form-select" id="objectiveFilter">
+            <label for="objectiveFilter">Pick a objective:</label>
+            <select name="trainingObjective" class="form-select" id="objectiveFilter">
                 <option selected>Select Objective</option>
                 <option value="functional">FUNCTIONAL TRAINING</option>
                 <option value="mobility">MOBILITY TRAINING</option>
@@ -52,23 +50,47 @@
                 <option value="other">OTHER</option>
             </select>
         </div>
+    </div>
+
+
+    <div class="row my-3">
+        <label>Available time for training sessions:</label>
+        <div class="col">
+            <input class="form-control"
+                   type="time"
+                   id="startSession"
+                   name="startSession"
+                />
+            <label for="startSession">
+                <small>Start</small>
+            </label>
+        </div>
 
         <div class="col">
-            <div id="timeFilter">
-                <label>Choose a time for your training session:</label>
 
-                <input class="form-control" type="time" id="startSession" name="startSession"/>
-                <small>Start</small>
-                <input class="form-control" type="time" id="endSession" name="endSession"/>
+            <input class="form-control"
+                   type="time"
+                   id="endSession"
+                   name="endSession"
+                  />
+            <label for="endSession">
+
                 <small>End</small>
-            </div>
+            </label>
         </div>
+    </div>
 
-        <div class="form-check form-switch mb-4">
-            <input class="form-check-input" type="checkbox" id="toggleTrainers">
-            <label class="form-check-label" for="toggleTrainers">Show Personal Trainers</label>
-        </div>
-
-        <button class="btn btn-primary" id="subscribeBtn" type="submit">Submit</button>
-
+<!--    <div class="form-check form-switch mb-4">-->
+<!--        <input class="form-check-input" type="checkbox" id="toggleTrainers">-->
+<!--        <label class="form-check-label" for="toggleTrainers">Show Personal Trainers</label>-->
+<!--    </div>-->
+    <div class="row my-3">
+        <button
+                class="btn btn-primary"
+                id="subscribeBtn"
+                type="submit"
+        >
+            Submit
+        </button>
+    </div>
 </form>

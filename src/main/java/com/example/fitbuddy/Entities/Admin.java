@@ -1,13 +1,15 @@
 package com.example.fitbuddy.Entities;
 
-public class Admin {
-    String role;
 
-    public String getRole() {
-        return role;
-    }
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class Admin extends UserFitbuddy{
+    private String role;
 }

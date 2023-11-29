@@ -1,18 +1,16 @@
 package com.example.fitbuddy.Entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Exercise {
-    String name;
-    String dayOfTheWeek;
-    int order;
-
-    public String getName() {
-        return name;
-    }
-    public String getDayOfTheWeek() {
-        return dayOfTheWeek;
-    }
-    public int getOrder() {
-        return order;
-    }
-
+    private String name;
+    private String dayOfTheWeek;
+    private int order;
 }

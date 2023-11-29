@@ -39,6 +39,9 @@ public class WebSecurityConfig {
                 )
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(
+                                "/",
+                                "/css/**",
+                                "/assets/**",
                                 "/site/**",
                                 "/app/signUp",
                                 "/app/login",
@@ -61,7 +64,6 @@ public class WebSecurityConfig {
                         .logoutSuccessUrl("/site/")
                         .permitAll()
                 );
-
         return http.build();
     }
 

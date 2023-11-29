@@ -12,7 +12,7 @@
     <h1>Find a Buddy</h1>
     <div class="row">
         <div class="col">
-            <form th:replace="fragments/forms.html :: preferencesForm(action='/app/findABuddy')"></form>
+            <form th:replace="fragments/forms.html :: preferencesForm(action='/app/findABuddy', showGenderPrefix=false)"></form>
         </div>
         <div class="col">
             <h1>Results</h1>
@@ -22,7 +22,6 @@
             <p>Buddy 4</p>
         </div>
     </div>
-
 
 </div>
 
