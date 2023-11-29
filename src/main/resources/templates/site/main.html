@@ -1,31 +1,50 @@
 <!doctype html>
-<html lang="en">
-    <head>
-        <title>FitBuddy | Index</title>
-        <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
-
-    </head>
-
+<html lang="en" xmlns:border-radius="http://www.w3.org/1999/xhtml">
+<head>
+    <title>FitBuddy | Index</title>
+    <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
+</head>
 <body>
+<section th:replace="fragments/navbar.html :: site-navbar(activePage = ${page})"></section>
+<div class="container my-5">
+    <img th:src="@{/assets/dumbbell-image.jpg}" alt="Dumbbell Image" style="width:1300px;height:600px; border-radius: 18px"/>
+</div>
+<div class="container my-5" style= "border: darkgray solid 1px; border-radius: 10px"  >
+    <h2>FitBuddy Vision</h2>
+    <span> To be the leading global platform connecting fitness enthusiasts, fostering a vibrant and healthy community where everyone supports each other to achieve their physical and mental well-being goals.</span>
+    <br/>
+    <br/>
+    <h3>FitBuddy Mission</h3>
+    <span>To facilitate the connection between individuals seeking workout partners and the specialized guidance of personal trainers, creating an inclusive ecosystem that promotes motivation, consistency, and success in each individual’s fitness journey.</span>
+    <br/>
+    <br/>
+    <h3>FitBuddy Values</h3>
+    <ul class="list-group" id="values-list" style="list-style-type: none">
+        <li><strong>Community and Mutual Support</strong>
+            <p>Foster a welcoming environment where members support, motivate, and inspire each other in their fitness
+                journeys.
+            </p></li>
+        <li><strong>Inclusion and Diversity</strong>
+            <p>Celebrate the diversity of profiles, skills, and goals, ensuring our platform is accessible to everyone,
+                regardless of their fitness level or experience.
+            </p></li>
+        <li><strong>Transparency and Integrity</strong>
+            <p>Operate with complete transparency, honesty, and ethics in all aspects, maintaining the trust of our
+                users and partners.
 
-<section th:replace="fragments/navbar.html :: site-navbar(activePage = ${page})" ></section>
-    <div class="container my-5">
-        <h1>Hello, world! <span th:text="${page}"></span></h1>
-        <div class="col-lg-8 px-0">
-            <p class="fs-5">You've successfully loaded up the Bootstrap starter example. It includes <a
-                    href="https://getbootstrap.com/">Bootstrap 5</a> via the <a
-                    href="https://www.jsdelivr.com/package/npm/bootstrap">jsDelivr CDN</a> and includes an additional
-                CSS and JS file for your own code.</p>
-            <p>Feel free to download or copy-and-paste any parts of this example.</p>
+            </p></li>
+        <li><strong>Innovation and Continuous Improvement</strong>
+            <p>Continuously seek innovation to provide the best possible experience, integrating user feedback and
+                advancing with continuous improvements in our services and features.
 
-            <hr class="col-1 my-4">
+            </p></li>
+        <li><strong>Excellence and Quality</strong>
+            <p>Commitment to excellence in all aspects of service, from the quality of connection to the relevance and
+                effectiveness of the workouts and guidance provided.
 
-            <a href="https://getbootstrap.com" class="btn btn-primary">Read the Bootstrap docs</a>
-            <a href="https://github.com/twbs/examples" class="btn btn-secondary">View on GitHub</a>
-        </div>
-    </div>
-
-    <footer th:replace="fragments/footer :: footer"></footer>
+            </p></li>
+    </ul>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
-
 </html>
