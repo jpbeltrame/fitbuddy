@@ -90,8 +90,14 @@ public class UserController {
     }
 
     @GetMapping(path = "app/dashboard")
-    public String DashboardPageLoader(Model model) {
+    public String DashboardPageLoader(Model model, Authentication authentication) {
+        UserFitbuddy user = userRepository.findUserByEmail(
+                authentication.getName()
+        );
+
         model.addAttribute("page", "dashboard");
+        model.addAttribute("user", user);
+
         return "app/index";
     }
     @GetMapping(path = "app/findABuddy")
@@ -150,9 +156,9 @@ public class UserController {
     @GetMapping(path = "app/profile")
     public String ProfilePageLoader(Model model, Authentication authentication) {
         model.addAttribute("page", "profile");
-        String username = authentication.getName();
-
-        UserFitbuddy user = userRepository.findUserByEmail(username);
+        UserFitbuddy user = userRepository.findUserByEmail(
+                authentication.getName()
+        );
 
         model.addAttribute("page","profile");
         model.addAttribute("user", user);
@@ -163,9 +169,6 @@ public class UserController {
     @GetMapping(path = "app/settings")
     public String SettingsPageLoader(Model model) {
         model.addAttribute("page", "settings");
-
-
-
         return "app/profile";
     }
 

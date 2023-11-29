@@ -1,32 +1,19 @@
 package com.example.fitbuddy.Entities;
 
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Reward  {
-    String label;
-    LocalDate acquiredAt;
-
-//    public Reward(String username, String password, String id, String name, LocalDate enrollDate, String location) {
-//        super(username, password, id, name, enrollDate, location);
-//    }
-//
-//    public String getId(){
-//        return supp;
-//    }
-//    public String getLabel() {
-//        return label;
-//    }
-//
-//    public void setLabel(String label) {
-//        this.label = label;
-//    }
-//
-//    public LocalDate getAcquiredAt() {
-//        return acquiredAt;
-//    }
-//
-//    public void setAcquiredAt(LocalDate acquiredAt) {
-//        this.acquiredAt = acquiredAt;
-//    }
+    private String label;
+    @CreatedDate
+    private Date createdAt;
 }

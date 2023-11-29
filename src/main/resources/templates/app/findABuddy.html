@@ -11,7 +11,10 @@
 <div class="container my-5">
     <h1>Find a Buddy</h1>
 
-    <form th:replace="fragments/forms.html :: preferencesForm(action='/app/preferences')"></form>
+    <form th:replace="fragments/forms.html :: preferencesForm(
+        action='/app/preferences',
+        showGenderPrefix=false
+    )"></form>
 
 </div>
 

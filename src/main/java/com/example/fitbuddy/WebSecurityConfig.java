@@ -39,6 +39,7 @@ public class WebSecurityConfig {
                 )
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(
+                                "/",
                                 "/site/**",
                                 "/app/signUp",
                                 "/app/login",
