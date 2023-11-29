@@ -1,24 +1,26 @@
-package com.example.fitbuddy.DTO;
+package com.example.fitbuddy.Entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.List;
+import java.util.Arrays;
 
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class FindABuddyForm {
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserPreferences {
     private String gender;
     private String[] trainingDays;
     private String trainingObjective;
     private LocalTime startSession;
     private LocalTime endSession;
+
+    @Override
+    public String toString() {
+        return getGender()+ Arrays.toString(getTrainingDays())+getTrainingObjective()+getStartSession()+getEndSession();
+    }
 }

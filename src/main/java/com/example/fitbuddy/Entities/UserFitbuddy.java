@@ -7,8 +7,6 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 
 @Getter
@@ -27,5 +25,5 @@ public class UserFitbuddy {
     private Date birthDate;
     private String location;
     private String subscriptionType;
-    private Preferences preferences;
+    private UserPreferences preferences;
 }
