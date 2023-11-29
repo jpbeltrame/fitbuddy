@@ -10,11 +10,18 @@
 
 <div class="container my-5">
     <h1>Find a Buddy</h1>
-
-    <form th:replace="fragments/forms.html :: preferencesForm(
-        action='/app/preferences',
-        showGenderPrefix=false
-    )"></form>
+    <div class="row">
+        <div class="col">
+            <form th:replace="fragments/forms.html :: preferencesForm(action='/app/findABuddy', showGenderPrefix=false)"></form>
+        </div>
+        <div class="col">
+            <h1>Results</h1>
+            <p>Buddy 1</p>
+            <p>Buddy 2</p>
+            <p>Buddy 3</p>
+            <p>Buddy 4</p>
+        </div>
+    </div>
 
 </div>
 

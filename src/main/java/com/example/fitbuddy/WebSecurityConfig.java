@@ -50,7 +50,7 @@ public class WebSecurityConfig {
                         .requestMatchers(
                                 "/admin/**"
                         ).hasRole("admin")
-                        .anyRequest().denyAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/app/login")

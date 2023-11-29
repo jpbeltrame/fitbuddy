@@ -2,8 +2,7 @@
     <div class="row my-2">
         <div class="col">
             <label for="genderFilter"><span th:if="${showGenderPrefix}">Your </span>Gender:</label>
-            <select class="form-select" id="genderFilter">
-                <option selected>Select Gender</option>
+            <select name="gender" class="form-select" id="genderFilter">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
@@ -15,23 +14,23 @@
         <div class="col">
             <label>Training Days Options:</label>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="mondayCheckbox" value="monday">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="mondayCheckbox" value="monday">
                 <label class="form-check-label" for="mondayCheckbox">Monday</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="tuesdayCheckbox" value="tuesday">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="tuesdayCheckbox" value="tuesday">
                 <label class="form-check-label" for="tuesdayCheckbox">Tuesday</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="wednesdayCheckbox" value="wednesday">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="wednesdayCheckbox" value="wednesday">
                 <label class="form-check-label" for="wednesdayCheckbox">Wednesday</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="thursdayCheckbox" value="thursday">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="thursdayCheckbox" value="thursday">
                 <label class="form-check-label" for="thursdayCheckbox">Thursday</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="fridayCheckbox" value="friday">
+                <input class="form-check-input" type="checkbox" name="trainingDays" id="fridayCheckbox" value="friday">
                 <label class="form-check-label" for="fridayCheckbox">Friday</label>
             </div>
         </div>
@@ -40,7 +39,7 @@
     <div class="row my-3">
         <div class="col">
             <label for="objectiveFilter">Pick a objective:</label>
-            <select class="form-select" id="objectiveFilter">
+            <select name="trainingObjective" class="form-select" id="objectiveFilter">
                 <option selected>Select Objective</option>
                 <option value="functional">FUNCTIONAL TRAINING</option>
                 <option value="mobility">MOBILITY TRAINING</option>
@@ -61,22 +60,21 @@
                    type="time"
                    id="startSession"
                    name="startSession"
-                   min="09:00" max="18:00"
-                   required />
+                />
             <label for="startSession">
                 <small>Start</small>
             </label>
         </div>
 
         <div class="col">
+
             <input class="form-control"
                    type="time"
                    id="endSession"
                    name="endSession"
-                   min="09:00"
-                   max="18:00"
-                   required />
+                  />
             <label for="endSession">
+
                 <small>End</small>
             </label>
         </div>

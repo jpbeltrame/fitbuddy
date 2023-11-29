@@ -4,14 +4,15 @@ import com.example.fitbuddy.DTO.SignupForm;
 import com.example.fitbuddy.Entities.Subscription;
 import com.example.fitbuddy.Entities.UserFitbuddy;
 import com.example.fitbuddy.DTO.FindABuddyForm;
+import com.example.fitbuddy.Entities.UserPreferences;
 import com.example.fitbuddy.Repositories.SubscriptionRepository;
 import com.example.fitbuddy.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.Principal;
+import java.util.Arrays;
 
 
 @Controller
@@ -100,54 +101,69 @@ public class UserController {
 
         return "app/index";
     }
+
     @GetMapping(path = "app/findABuddy")
     public String FindABuddyPageLoader(Model model) {
         model.addAttribute("page", "findABuddy");
         return "app/findABuddy";
     }
+
     @PostMapping(
             path = "app/findABuddy",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
     public String FindBuddyHandler(FindABuddyForm form, Model model) {
+
+        System.out.println("---------Trainning days: " + Arrays.toString(form.getTrainingDays()));
+        System.out.println("---------Start session: " + form.getStartSession());
+        System.out.println("---------End session: " + form.getEndSession());
+
         String errorField = "";
         String errorMessage = "";
 
-        if (form.getTrainingDays().isEmpty()) {
+        subscriptionRepository.findAll().forEach(userFitbuddy -> System.out.println("----------User ID: " + userFitbuddy.getUserId()));
+
+        if (form.getTrainingDays().length == 0) {
             errorField = "trainingDays";
             errorMessage ="Please select at least one training day.";
         }
 
-        if (form.getStartSession().isEmpty()) {
-            errorField = "startSession";
-            errorMessage ="Please select the time for start session.";
-        }
-
-        if (form.getEndSession().isEmpty()) {
-            errorField = "endSession";
-            errorMessage ="Please select the time for end session.";
-        }
-
-        if (!errorField.isEmpty()){
-            model.addAttribute("page","findABuddy");
-            model.addAttribute("errorField",errorField);
-            model.addAttribute("errorMessage",errorMessage);
-            return "app/findABuddy";
-        }
-
         return "app/findABuddy";
     }
+
+
+    @PostMapping(
+            path = "app/updatePrefereces",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public String SavePreferencesHandler(Model model, FindABuddyForm form, Authentication authentication) {
+
+        UserFitbuddy user = userRepository.findUserByEmail(authentication.getName());
+
+        UserPreferences userPreferences = new UserPreferences();
+        userPreferences.setGender(form.getGender());
+        userPreferences.setTrainingDays(form.getTrainingDays());
+        userPreferences.setTrainingObjective(form.getTrainingObjective());
+        userPreferences.setStartSession(form.getStartSession());
+        userPreferences.setEndSession(form.getEndSession());
+
+        user.setPreferences(userPreferences);
+
+        return "redirect:/app/dashboard";
+    };
 
     @GetMapping(path = "app/forgotPassword")
     public String ForgotPasswordPageLoader(Model model) {
         model.addAttribute("page", "forgotPassword");
         return "app/forgotPassword";
     }
+
     @GetMapping(path = "app/login")
     public String LoginPageLoader(Model model) {
         model.addAttribute("page", "login");
         return "app/login";
     }
+
     @GetMapping(path = "app/profile")
     public String ProfilePageLoader(Model model, Authentication authentication) {
         model.addAttribute("page", "profile");
@@ -166,5 +182,4 @@ public class UserController {
         model.addAttribute("page", "settings");
         return "app/profile";
     }
-
 }
