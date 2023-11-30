@@ -19,6 +19,18 @@
                 )"
             ></form>
         </div>
+        <div th:unless="${user.getPreferences()} == null">
+            <h1>Thanks for completing your profile
+                <span class="text-decoration-underline" th:text="${user.getName()}"></span>!
+            </h1>
+            <h5 class="mb-4">You can find a buddy now!</h5>
+            <form
+                    th:replace="fragments/forms :: preferencesForm(
+                    action='/app/findABuddy',
+                    showGenderPrefix=false
+                )"
+            ></form>
+        </div>
     </div>
     <footer th:replace="fragments/footer :: footer"></footer>
 </body>

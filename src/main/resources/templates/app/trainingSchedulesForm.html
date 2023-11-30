@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>FitBuddy | Index</title>
+    <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
+</head>
+<body>
+<section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})"></section>
+
+<div class="container my-5">
+    <h1>Training Schedule</h1>
+    <form action="/app/schedules" method="post">
+        <div class="col-md-12">
+
+            <div class="row my-3">
+                <div class="col">
+                    <label for="trainingTitleInput" class="form-label">Training Title</label>
+                    <input type="text"
+                           class="form-control"
+                           id="trainingTitleInput"
+                           placeholder="A cool training title"
+                           name="title"
+                           required
+                           th:value="${trainingSchedule?.getTitle()}"
+                           th:attrappend="disabled=${#strings.equals(action, 'view')}?'disabled'"
+                    />
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col">
+                    <label for="trainingLocationInput" class="form-label">Location</label>
+                    <input type="text"
+                           class="form-control"
+                           id="trainingLocationInput"
+                           placeholder="Where you will train?"
+                           name="location"
+                           required
+                           th:value="${trainingSchedule?.getLocation()}"
+                           th:attrappend="disabled=${#strings.equals(action, 'view')}?'disabled'"
+                    />
+                </div>
+            </div>
+            <div class="row my-3">
+                <label>Duration:</label>
+                <div class="col">
+                    <label for="sessionDate">
+                        <small>Date</small>
+                    </label>
+                    <input class="form-control"
+                           type="date"
+                           id="sessionDate"
+                           name="date"
+                           required
+                           th:value="${trainingSchedule?.getDate()}"
+                           th:attrappend="disabled=${#strings.equals(action, 'view')}?'disabled'"
+                    />
+                </div>
+                <div class="col">
+                    <label for="startSession">
+                        <small>Start</small>
+                    </label>
+                    <input class="form-control"
+                           type="time"
+                           id="startSession"
+                           name="startAt"
+                           required
+                           th:value="${trainingSchedule?.getStartAt()}"
+                           th:attrappend="disabled=${#strings.equals(action, 'view')}?'disabled'"
+                    />
+                </div>
+                <div class="col">
+                    <label for="endSession">
+                        <small>End</small>
+                    </label>
+                    <input class="form-control"
+                           type="time"
+                           id="endSession"
+                           name="endAt"
+                           required
+                           th:value="${trainingSchedule?.getEndAt()}"
+                           th:attrappend="disabled=${#strings.equals(action, 'view')}?'disabled'"
+                    />
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col" th:unless="${#strings.equals(action, 'view')}">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>

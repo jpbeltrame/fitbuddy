@@ -5,19 +5,29 @@
 <!--                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>-->
 <!--            </a>-->
             <ul class="nav col-8 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <a href="/"><img th:src="@{/assets/logo-no-background.png}" style="width:auto;height:40px;" alt="logo"/></a>
+                <a href="/">
+                    <img th:src="@{/assets/logo-no-background.png}" style="width:auto;height:40px;" alt="logo"/>
+                </a>
                 <li><a th:href="@{/site/}" class="nav-link px-2"
-                       th:classappend="${activePage == 'main'} ? 'text-secondary' : 'text-white' ">Home</a>
+                       th:classappend="${activePage == 'main'} ? 'text-secondary' : 'text-white' ">
+                    Home
+                </a>
                 </li>
                 <li><a th:href="@{/site/support}" class="nav-link px-2"
-                       th:classappend="${activePage == 'support'} ? 'text-secondary' : 'text-white' ">Support</a>
+                       th:classappend="${activePage == 'support'} ? 'text-secondary' : 'text-white' ">
+                    Support
+                </a>
                 </li>
                 <li><a th:href="@{/site/about}" class="nav-link px-2"
-                       th:classappend="${activePage == 'about'} ? 'text-secondary' : 'text-white' ">About</a>
+                       th:classappend="${activePage == 'about'} ? 'text-secondary' : 'text-white' ">
+                    About
+                </a>
                 </li>
                 <li>
                     <a th:href="@{/site/eula}" class="nav-link px-2"
-                       th:classappend="${activePage == 'eula'} ? 'text-secondary' : 'text-white' ">Eula</a>
+                       th:classappend="${activePage == 'eula'} ? 'text-secondary' : 'text-white' ">
+                        Eula
+                    </a>
                 </li>
             </ul>
 
@@ -35,18 +45,26 @@
             <ul class="nav col-10 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <a href="/"><img th:src="@{/assets/logo-no-background.png}" style="width:auto;height:40px;" alt="logo"/></a>
                 <li><a th:href="@{/app/dashboard}" class="nav-link px-2"
-                       th:classappend="${activePage == 'index'} ? 'text-secondary' : 'text-white' ">Home</a>
+                       th:classappend="${activePage == 'index'} ? 'text-secondary' : 'text-white' ">
+                    Home
+                </a>
                 </li>
                 <li><a th:href="@{/app/findABuddy}" class="nav-link px-2"
-                       th:classappend="${activePage == 'findABuddy'} ? 'text-secondary' : 'text-white' ">Find a Buddy</a>
+                       th:classappend="${activePage == 'findABuddy'} ? 'text-secondary' : 'text-white' ">
+                    Find a Buddy
+                </a>
+                </li>
+                <li>
+                    <a th:href="@{/app/schedules}" class="nav-link px-2"
+                       th:classappend="${activePage == 'schedules'} ? 'text-secondary' : 'text-white' ">
+                        Training Schedule
+                    </a>
                 </li>
                 <li>
                     <a th:href="@{/app/profile}" class="nav-link px-2"
-                       th:classappend="${activePage == 'profile'} ? 'text-secondary' : 'text-white' ">Profile</a>
-                </li>
-                <li>
-                    <a th:href="@{/app/settings}" class="nav-link px-2"
-                       th:classappend="${activePage == 'settings'} ? 'text-secondary' : 'text-white' ">Settings</a>
+                       th:classappend="${activePage == 'profile'} ? 'text-secondary' : 'text-white' ">
+                        Profile
+                    </a>
                 </li>
             </ul>
             <div class="text-end">
@@ -55,5 +73,3 @@
         </div>
     </div>
 </header>
-
-<!-- th:classappend:="${page == 'main' ? 'text-secondary' : 'text-white' }" -->

@@ -1,9 +1,9 @@
 package com.example.fitbuddy.Web;
 
 import com.example.fitbuddy.DTO.SignupForm;
+import com.example.fitbuddy.DTO.FindABuddyForm;
 import com.example.fitbuddy.Entities.Subscription;
 import com.example.fitbuddy.Entities.UserFitbuddy;
-import com.example.fitbuddy.DTO.FindABuddyForm;
 import com.example.fitbuddy.Entities.UserPreferences;
 import com.example.fitbuddy.Repositories.SubscriptionRepository;
 import com.example.fitbuddy.Repositories.UserRepository;
@@ -31,7 +31,6 @@ public class UserController {
     private UserRepository userRepository;
     private SubscriptionRepository subscriptionRepository;
     private PasswordEncoder passwordEncoder;
-    private UserDetailsService userDetailsService;
 
     @GetMapping(path = "app/signUp")
     public String IndexPageLoader(Model model) {

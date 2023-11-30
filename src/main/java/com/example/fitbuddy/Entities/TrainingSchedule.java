@@ -5,20 +5,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import java.util.ArrayList;
-import java.util.Date;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Document("TrainingSchedules")
 public class TrainingSchedule  {
 
     @Id
     private String id;
-    private ArrayList<String> buddiesIds;
-    private ArrayList<Exercise> exercises;
-    private Date startAt;
-    private Date endAt;
+    private List<String> buddiesIds;
+    private List<String> exercises;
+    private String location;
+    private String title;
+    private LocalDate date;
+    private LocalTime startAt;
+    private LocalTime endAt;
 }
 
