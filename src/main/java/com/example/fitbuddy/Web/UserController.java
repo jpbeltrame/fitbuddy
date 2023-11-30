@@ -18,7 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 @Controller
@@ -116,10 +118,18 @@ public class UserController {
         System.out.println("---------Start session: " + form.getStartSession());
         System.out.println("---------End session: " + form.getEndSession());
 
+
         String errorField = "";
         String errorMessage = "";
 
-        subscriptionRepository.findAll().forEach(userFitbuddy -> System.out.println("----------User ID: " + userFitbuddy.getUserId()));
+        List<UserFitbuddy> users = userRepository.findUserByGender(form.getGender());
+        model.addAttribute("users", users);
+
+        for (UserFitbuddy u: users) {
+            System.out.println(u.getName());
+        }
+
+        System.out.println("---------Size: " + users.size());
 
         if (form.getTrainingDays().length == 0) {
             errorField = "trainingDays";

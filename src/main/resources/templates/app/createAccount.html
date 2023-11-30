@@ -25,13 +25,13 @@
         .step-button[aria-expanded="true"] {
             width: 60px;
             height: 60px;
-            background-color: var(--bs-primary);
-            color: #fff;
+            background-color: #31C48D6F;
+            color: #000000;
         }
 
         .done {
-            background-color: var(--bs-primary);
-            color: #fff;
+            background-color: #31C48D6F;
+            color: #000000;
         }
 
         .step-item {
@@ -74,7 +74,7 @@
 <body>
 <section th:replace="fragments/navbar.html :: site-navbar(activePage = ${page})"></section>
 <form action="/app/signUp" method="post">
-    <div class="container">
+    <div class="container" style="margin-top: 1rem">
         <div class="accordion" id="accordionExample">
             <div class="steps">
 
@@ -186,8 +186,8 @@
                                 <label class="form-check-label" for="subscriptionTypeBuddy">Buddy</label>
                             </div>
                             <div>
-                                <button type="button" data-bs-toggle="collapse" class="btn btn-primary"
-                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button type="button" data-bs-toggle="collapse" class="btn"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background: #31C48D6F; color: #212529">
                                     Next
                                 </button>
                             </div>
@@ -223,12 +223,12 @@
                             >
                         </div>
                         <div>
-                            <button type="button" data-bs-toggle="collapse" class="btn btn-primary"
-                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <button type="button" data-bs-toggle="collapse" class="btn"
+                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="background: #212529; color: #fff">
                                 Previous
                             </button>
-                            <button class="btn btn-primary" id="nextBtn" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <button class="btn" id="nextBtn" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background: #31C48D6F; color: #212529">
                                 Next
                             </button>
                         </div>
@@ -271,10 +271,13 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="button" data-bs-toggle="collapse" class="btn btn-primary"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Previous
+                        <button type="button" data-bs-toggle="collapse" class="btn"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background: #212529; color: #fff">
+                            Previous
                         </button>
-                        <button class="btn btn-primary" id="subscribeBtn" type="submit">Subscribe</button>
+                        <button class="btn" id="subscribeBtn" type="submit" style="background: #31C48D6F; color: #212529">
+                            Subscribe
+                        </button>
                     </div>
                 </div>
             </div>

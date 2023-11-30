@@ -3,9 +3,18 @@
 <head>
     <title>FitBuddy | Index</title>
     <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
+    <script src="https://cdn.jsdelivr.net/npm/@weavy/dropin-js/dist/weavy.js" crossorigin="anonymous"></script>
+    <script>
+        var myModal = document.getElementById('exampleModalLive')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+    </script>
 </head>
 <body>
-<section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})" ></section>
+<section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})"></section>
 
 
 <div class="container my-5">
@@ -15,17 +24,55 @@
             <form th:replace="fragments/forms.html :: preferencesForm(action='/app/findABuddy', showGenderPrefix=false)"></form>
         </div>
         <div class="col">
-            <h1>Results</h1>
-            <p>Buddy 1</p>
-            <p>Buddy 2</p>
-            <p>Buddy 3</p>
-            <p>Buddy 4</p>
+            <div class="card rounded-3 shadow-sm m-3" style="border-color: #212529" th:each="user, iterstat : ${users}">
+                <div class="card-header py-3" style="background: #212529">
+                    <h4 class="my-0 fw-normal" style="color: white" th:text="${user.getName()}"></h4>
+                </div>
+                <div class="card-body row">
+                    <div class="col">
+                        <h5 class="card-text" th:text="${user.getCity()}"></h5>
+                        <h5 class="card-subtitle mb-2 text-muted" th:text="${user.getSubscriptionType()}"></h5>
+                    </div>
+                    <button type="button" data-bs-toggle="modal" class="btn w-100 btn btn-lg col" style="background: #31C48D6F" data-bs-target="#exampleModal"
+                            data-bs-whatever="@mdo">Send message
+                    </button>
+                    <div>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <h5>Sending message to:</h5>
+                                                <h5 th:text="${user.getName()}"></h5>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn" style="background: #31C48D6F">Send message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
 
-    <footer th:replace="fragments/footer :: footer"></footer>
+
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 
 </html>
