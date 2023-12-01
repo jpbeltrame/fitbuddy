@@ -12,6 +12,10 @@
         <h1>Login</h1>
         <h3>Sign in to continue</h3>
 
+        <div th:if="${param.errorMsg}" th:text="${param.errorMsg}" class="alert alert-danger">
+            Invalid credentials
+        </div>
+
         <div th:if="${param.error}" class="alert alert-danger">
             Invalid credentials
         </div>
