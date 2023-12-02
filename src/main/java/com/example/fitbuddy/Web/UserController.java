@@ -182,8 +182,14 @@ public class UserController {
                 authentication.getName()
         );
 
+        model.addAttribute("page", "profile");
+        Subscription subscription = subscriptionRepository.findUserById(
+                user.getId()
+        );
+
         model.addAttribute("page","profile");
         model.addAttribute("user", user);
+        model.addAttribute("subscription", subscription);
 
         return "app/profile";
     }

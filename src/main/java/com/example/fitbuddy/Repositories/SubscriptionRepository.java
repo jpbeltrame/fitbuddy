@@ -10,4 +10,7 @@ public interface SubscriptionRepository extends MongoRepository<Subscription, St
 
     @Query("{type: '?0'}")
     List<Subscription> getByType(String subscriptionType);
+
+    @Query("{userId: '?0'}")
+    Subscription findUserById(String userId);
 }

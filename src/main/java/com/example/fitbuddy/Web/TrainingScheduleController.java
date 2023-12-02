@@ -44,7 +44,7 @@ public class TrainingScheduleController {
     }
 
     @GetMapping(path = "/app/schedules/{id}")
-    public String GetTariningSchedule(@PathVariable String id, Model model, Authentication authentication){
+    public String GetTrainingSchedule(@PathVariable String id, Model model, Authentication authentication){
 
         TrainingSchedule trainingSchedule = trainingScheduleRepository.getById(id);
         if(trainingSchedule == null) {
