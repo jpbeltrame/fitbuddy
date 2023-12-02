@@ -22,5 +22,8 @@ public class Buddy {
     private String personalId;
     private double score;
     private List<Reward> rewards;
-    private List<String> buddiesIds;
+    private List<BuddyConnectionRequest> buddiesIds;
 }
+
+
+

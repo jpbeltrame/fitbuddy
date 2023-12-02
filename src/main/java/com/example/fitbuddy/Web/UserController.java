@@ -2,6 +2,7 @@ package com.example.fitbuddy.Web;
 
 import com.example.fitbuddy.DTO.SignupForm;
 import com.example.fitbuddy.DTO.FindABuddyForm;
+import com.example.fitbuddy.DTO.UserConnectForm;
 import com.example.fitbuddy.Entities.*;
 import com.example.fitbuddy.Repositories.BuddyRepository;
 import com.example.fitbuddy.Repositories.PersonalTrainerRepository;
@@ -11,7 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -48,9 +48,15 @@ public class UserController {
         String errorField = "";
         String errorMessage = "";
 
+        UserFitbuddy user = userRepository.findUserByEmail(form.username);
+        if (user != null) {
+            errorField = "username";
+            errorMessage ="An account with this a-mail already exists.";
+        }
+
         if (form.name.isEmpty()) {
             errorField = "name";
-           errorMessage ="Please insert your name.";
+            errorMessage ="Please insert your name.";
         }
         if (form.password.length() < 6) {
             errorField = "password";
@@ -129,17 +135,18 @@ public class UserController {
         String errorField = "";
         String errorMessage = "";
 
-        List<UserFitbuddy> users = userRepository.findUserByGender(form.getGender());
+        List<UserFitbuddy> users = userRepository.findUserByGender(
+                form.getGender(),
+                form.getTrainingObjective()
+        );
         model.addAttribute("users", users);
 
         if (form.getTrainingDays().length == 0) {
             errorField = "trainingDays";
             errorMessage ="Please select at least one training day.";
         }
-
         return "app/findABuddy";
     }
-
 
     @PostMapping(
             path = "app/updatePrefereces",
@@ -161,6 +168,53 @@ public class UserController {
         userRepository.save(user);
 
         return "redirect:/app/dashboard";
+    };
+
+    @PostMapping(
+            path = "app/userConnect",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public String ConnectUser(UserConnectForm form, Authentication authentication) {
+        UserFitbuddy friendUser = userRepository.findById(form.getUserId()).get();
+        UserFitbuddy user = userRepository.findUserByEmail(authentication.getName());
+
+        Buddy userBuddy = buddyRepository.findByUserID(user.getId());
+        Buddy friendBuddy = buddyRepository.findByUserID(friendUser.getId());
+
+        BuddyConnectionRequest requester = new BuddyConnectionRequest(
+                friendUser.getId(),
+                true
+        );
+
+        BuddyConnectionRequest friend =new BuddyConnectionRequest(
+                userBuddy.getId(),
+                false
+        );
+
+        List<BuddyConnectionRequest> buddies = userBuddy.getBuddiesIds();
+        if (buddies == null) {
+            buddies = new ArrayList<BuddyConnectionRequest>();
+        }
+
+        if(!buddies.contains(requester))
+            buddies.add(requester);
+
+        userBuddy.setBuddiesIds(buddies);
+        buddyRepository.save(userBuddy);
+
+
+        // friend
+        buddies = friendBuddy.getBuddiesIds();
+        if (buddies == null) {
+            buddies = new ArrayList<BuddyConnectionRequest>();
+        }
+        if(!buddies.contains(friend))
+            buddies.add(friend);
+
+        friendBuddy.setBuddiesIds(buddies);
+        buddyRepository.save(friendBuddy);
+
+        return "redirect:/app/findABuddy?connected=true";
     };
 
     @GetMapping(path = "app/forgotPassword")

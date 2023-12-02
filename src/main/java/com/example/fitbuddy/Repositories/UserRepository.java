@@ -13,11 +13,13 @@ public interface UserRepository extends MongoRepository<UserFitbuddy, String> {
     UserFitbuddy findUserByEmail(String username);
 
     @Aggregation(pipeline = {
-            "{ '$match': {'preferences.gender':  '?0'} }",
+            "{ '$match': {subscriptionType: 'buddy', $or: [ " +
+                    "{'preferences.gender':  '?0', }, " +
+                    "{'preferences.trainingObjective': '?1' } ] } }",
             "{ '$sort' : { 'city' : 1 } }",
             "{ '$limit' : 10 }"
 
     })
-    List<UserFitbuddy> findUserByGender(String gender);
+    List<UserFitbuddy> findUserByGender(String gender, String trainingObjective);
 
 }
