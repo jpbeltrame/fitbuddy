@@ -93,17 +93,21 @@ public class UserController {
         userFitbuddy.setUsername(form.username);
         userFitbuddy = userRepository.save(userFitbuddy);
 
+        double price = 0;
+
         if (form.subscriptionType.equals("buddy")) {
             Buddy buddy = new Buddy();
             buddy.setUserId(userFitbuddy.getId());
             buddyRepository.save(buddy);
+            price = 1;
         } else {
             PersonalTrainer personal = new PersonalTrainer();
             personal.setUserId(userFitbuddy.getId());
             personalTrainerRepository.save(personal);
+            price = 10;
         }
         subscriptionRepository.save(
-                new Subscription(userFitbuddy.getId(), form.subscriptionType,10)
+                new Subscription(userFitbuddy.getId(), form.subscriptionType, price)
         );
 
         return "app/index";

@@ -6,6 +6,26 @@
 <head>
     <title>FitBuddy | Admin</title>
     <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
+    <script>
+        function DisplayUserData(name, subscriptionType, email, city, status, role) {
+            document.getElementById("profileName").innerHTML = name;
+            document.getElementById("subscriptionType").innerHTML = subscriptionType;
+            document.getElementById("email").innerHTML = email;
+            document.getElementById("city").innerHTML = city;
+            document.getElementById("status").innerHTML = status;
+            document.getElementById("role").innerHTML = role;
+
+            document.getElementById("userId_block").value = email;
+
+            if(status === "active"){
+                document.getElementById("statusChangeBtn").innerHTML = "Block User";
+
+            }else{
+                document.getElementById("statusChangeBtn").innerHTML = "Unblock User";
+            }
+        }
+
+    </script>
 </head>
 
 <body>
@@ -22,16 +42,25 @@
                 <div class="card-body">
                     <h2 class="card-title">Users</h2>
                     <div class="input-group">
-                        <input type="search" class="form-control rounded" name="search" placeholder="Search" aria-label="Search"
-                               aria-describedby="search-addon"/>
+
                         <form th:action="${'/admin/user'}" method="post">
-                            <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init style="background: #31C48D6F">Search</button>
+                            <input th:value="${searchString}" type="search" class="form-control rounded" name="search"
+                                   placeholder="Search" aria-label="Search"
+                                   aria-describedby="search-addon"/>
+                            <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init
+                                    style="background: #31C48D6F">Search
+                            </button>
                         </form>
                     </div>
 
                     <div th:if="${users != null && !users.isEmpty()}">
                         <ul class="list-group" id="ticketsList">
-                            <li th:each="user, iterstat: ${users}" th:id="|i${iterstat.index}|" class="list-group-item" ><span th:text="${user.getUsername()}"></span></li>
+                            <li th:each="user, iterstat: ${users}" th:id="|i${iterstat.index}|" class="list-group-item">
+                                <span th:text="${user.getUsername()}"></span>
+                                <a th:attr="onclick=|DisplayUserData('${user.getName()}', '${user.getSubscriptionType()}', '${user.getUsername()}', '${user.getCity()}', '${user.getStatus()}', '${user.getRole()}')|" class="btn btn-outline-secondary">
+                                    <i class="fa-regular fa-eye"></i>
+                                </a>
+                            </li>
 
                         </ul>
                     </div>
@@ -44,18 +73,19 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">User Details</h2>
-                    <form>
+                    <form th:action="${'/admin/user/toggleStatus'}" method="post">
                         <div class="container p-5 my-5 border">
-                           <!-- <p class="card-text" id="profileName"><strong>Name:</strong> <span
-                                    th:text="${user.getName()}"></span></p>
-                            <p class="card-text" id="profileEmail"><strong>Email:</strong> <span
-                                    th:text="${user.getUsername()}"></span></p>
-                            <p class="card-text" id="profileCity"><strong>City:</strong>
-                                <span th:text="${user.getCity()}"></span></p>-->
+                            <p class="card-text"><strong>Name: </strong><span id="profileName"></span></p>
+                            <p class="card-text"><strong>Subscription Type: </strong><span id="subscriptionType"></span></p>
+                            <p class="card-text"><strong>Email: </strong><span id="email"></span></p>
+                            <p class="card-text"><strong>City: </strong><span id="city"></span></p>
+                            <p class="card-text"><strong>Status: </strong><span id="status"></span></p>
+                            <p class="card-text"><strong>Role: </strong><span id="role"></span></p>
                         </div>
 
-                        <button type="submit" class="btn" style="background: #31C48D6F">Block User</button>
-                        <button type="submit" class="btn" style="background: #31C48D6F">Unblock User</button>
+                        <button type="submit" class="btn" id="statusChangeBtn" style="background: #31C48D6F">Block User</button>
+                        <input type="hidden" name="email" id="userId_block"/>
+
                     </form>
                 </div>
             </div>
@@ -67,9 +97,9 @@
                     <h2 class="card-title">Users</h2>
 
                     <ul class="list-group" id="user">
-                        <li class="list-group-item">Buddies:</li>
-                        <li class="list-group-item">Personal:</li>
-                        <li class="list-group-item">Total Users:</li>
+                        <li class="list-group-item">Buddies: <span th:text="${buddy}"></span></li>
+                        <li class="list-group-item">Personal: <span th:text="${personal}"></span></li>
+                        <li class="list-group-item">Total Users: <span th:text="${totalSubs}"></span></li>
                     </ul>
 
                 </div>
@@ -81,9 +111,9 @@
                     <h2 class="card-title">Monthly Revenue</h2>
 
                     <ul class="list-group" id="revenue">
-                        <li class="list-group-item">Buddies:</li>
-                        <li class="list-group-item">Personal:</li>
-                        <li class="list-group-item">Total Revenue:</li>
+                        <li class="list-group-item">Buddies: CA$<span th:text="${buddy}"></span></li>
+                        <li class="list-group-item">Personal: CA$<span th:text="${personalRevenue}"></span></li>
+                        <li class="list-group-item">Total Revenue: CA$<span th:text="${totalRevenue}"></span></li>
                     </ul>
                 </div>
             </div>

@@ -12,6 +12,9 @@ public interface UserRepository extends MongoRepository<UserFitbuddy, String> {
     @Query("{username:  '?0', status: 'active'}")
     UserFitbuddy findUserByEmail(String username);
 
+    @Query("{username:  '?0'}")
+    UserFitbuddy findUserByEmailIgnoreStatus(String username);
+
     @Aggregation(pipeline = {
             "{ '$match': {subscriptionType: 'buddy', $or: [ " +
                     "{'preferences.gender':  '?0', }, " +
