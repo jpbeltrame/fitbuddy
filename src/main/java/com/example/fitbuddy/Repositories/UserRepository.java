@@ -22,4 +22,12 @@ public interface UserRepository extends MongoRepository<UserFitbuddy, String> {
     })
     List<UserFitbuddy> findUserByGender(String gender, String trainingObjective);
 
+    @Aggregation(pipeline = {
+            "{ '$match': {'username':  {'$regex': '?0'}} }",
+            "{ '$sort' : { 'city' : 1 } }",
+            "{ '$limit' : 10 }"
+
+    })
+    List<UserFitbuddy> searchByUserName(String search);
+
 }

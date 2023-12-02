@@ -22,20 +22,17 @@
                 <div class="card-body">
                     <h2 class="card-title">Users</h2>
                     <div class="input-group">
-                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                        <input type="search" class="form-control rounded" name="search" placeholder="Search" aria-label="Search"
                                aria-describedby="search-addon"/>
-                        <form th:action="${'/app/admin/user'}" method="post">
-                            <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init style="background: #31C48D6F">Search</button>
+                        <form th:action="${'/admin/user'}" method="post">
+                            <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init style="background: #31C48D6F">Search</button>
                         </form>
                     </div>
 
-                    <div th:if="${#strings.isEmpty(param.section) || #strings.equals(param?.section, 'search')}">
+                    <div th:if="${users != null && !users.isEmpty()}">
                         <ul class="list-group" id="ticketsList">
-                            <li class="list-group-item">Ticket 1</li>
-                            <li class="list-group-item">Ticket 2</li>
-                            <li class="list-group-item">Ticket 3</li>
-                            <li class="list-group-item">Ticket 4</li>
-                            <li class="list-group-item">Ticket 5</li>
+                            <li th:each="user, iterstat: ${users}" th:id="|i${iterstat.index}|" class="list-group-item" ><span th:text="${user.getUsername()}"></span></li>
+
                         </ul>
                     </div>
 
