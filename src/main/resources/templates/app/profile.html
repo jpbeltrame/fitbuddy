@@ -19,7 +19,6 @@
             <ul class="list-group" id="settingsList">
                 <li class="list-group-item"><a href="?section=profile">Profile Details</a></li>
                 <li class="list-group-item"><a href="?section=buddies">Buddies List</a></li>
-                <li class="list-group-item"><a href="?section=support">Support</a></li>
                 <li class="list-group-item"><a href="?section=subscription">Subscription Details</a></li>
             </ul>
         </div>
@@ -37,17 +36,29 @@
                 </div>
             </div>
         </div>
-        <div th:if="${#strings.equals(param?.section, 'buddies')}" class="col-md-8">
+        <div th:if="${#strings.equals(param?.section, 'buddies') && buddies != null && !buddies.isEmpty()}" class="col-md-8">
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Buddies</h2>
                     <ul class="list-group" id="buddiesList">
-                        <li class="list-group-item">Buddy 1</li>
-                        <li class="list-group-item">Buddy 2</li>
-                        <li class="list-group-item">Buddy 3</li>
+                        <li  th:each="buddy, iterstat: ${buddies}" th:id="|i${iterstat.index}|"  class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0" th:text="${buddy.getName()}"></h6>
+                                <small class="text-body-secondary">
+                                    <b>City:</b> <span th:text="${buddy.getCity()}"></span> <br />
+                                </small>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <button type="submit" class="mx-1 btn btn-outline-danger">
+                                    <i class="fa-solid fa-ban"></i>
+                                </button>
+
+                                <button type="submit" class="mx-1 btn btn-outline-success">
+                                    <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
+                        </li>
                     </ul>
-                    <br>
-                    <p class="card-text"><strong>Badges Owned:</strong></p>
                 </div>
             </div>
         </div>

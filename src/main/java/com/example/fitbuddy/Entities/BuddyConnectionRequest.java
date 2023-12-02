@@ -1,10 +1,10 @@
 package com.example.fitbuddy.Entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class BuddyConnectionRequest {
     private String userId;
-    private boolean approved;
+    private Boolean approved;
 
     @Override
     public boolean equals(Object obj) {
@@ -20,6 +20,7 @@ public class BuddyConnectionRequest {
             BuddyConnectionRequest temp = (BuddyConnectionRequest) obj;
             return this.userId.equals(temp.getUserId());
         }
+
         return false;
     }
 }

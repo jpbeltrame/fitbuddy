@@ -29,8 +29,14 @@ public interface UserRepository extends MongoRepository<UserFitbuddy, String> {
             "{ '$match': {'username':  {'$regex': '?0'}} }",
             "{ '$sort' : { 'city' : 1 } }",
             "{ '$limit' : 10 }"
-
     })
     List<UserFitbuddy> searchByUserName(String search);
 
+    @Aggregation(pipeline = {
+            "{ '$match': {'_id': { '$in' : ?0} } }",
+            "{ '$sort' : { 'username' : 1 } }",
+            "{ '$limit' : 100 }"
+
+    })
+    List<UserFitbuddy> getByUserIds(List<String> search);
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -190,10 +191,8 @@ public class UserController {
                 true
         );
 
-        BuddyConnectionRequest friend =new BuddyConnectionRequest(
-                userBuddy.getId(),
-                false
-        );
+        BuddyConnectionRequest friend =new BuddyConnectionRequest();
+        friend.setUserId(user.getId());
 
         List<BuddyConnectionRequest> buddies = userBuddy.getBuddiesIds();
         if (buddies == null) {
@@ -221,6 +220,44 @@ public class UserController {
         return "redirect:/app/findABuddy?connected=true";
     };
 
+    @PostMapping(
+            path = "app/userConnect/{id}/accept",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public String AllowConnection(UserConnectForm form, Authentication authentication) {
+
+        UserFitbuddy user = userRepository.findUserByEmail(authentication.getName());
+        Buddy userBuddy = buddyRepository.findByUserID(user.getId());
+
+        userBuddy.getBuddiesIds().forEach(u -> {
+            if(u.getUserId().equals(form.getUserId()))
+                u.setApproved(true);
+        });
+
+        buddyRepository.save(userBuddy);
+
+        return "redirect:/app/profile?connected=true";
+    };
+
+    @PostMapping(
+            path = "app/userConnect/{id}/block",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public String block(UserConnectForm form, Authentication authentication) {
+
+        UserFitbuddy user = userRepository.findUserByEmail(authentication.getName());
+        Buddy userBuddy = buddyRepository.findByUserID(user.getId());
+
+        userBuddy.getBuddiesIds().forEach(u -> {
+            if(u.getUserId().equals(form.getUserId()))
+                u.setApproved(false);
+        });
+
+        buddyRepository.save(userBuddy);
+
+        return "redirect:/app/profile?connected=true";
+    };
+
     @GetMapping(path = "app/forgotPassword")
     public String ForgotPasswordPageLoader(Model model) {
         model.addAttribute("page", "forgotPassword");
@@ -235,26 +272,30 @@ public class UserController {
 
     @GetMapping(path = "app/profile")
     public String ProfilePageLoader(Model model, Authentication authentication) {
-        model.addAttribute("page", "profile");
         UserFitbuddy user = userRepository.findUserByEmail(
                 authentication.getName()
         );
 
-        model.addAttribute("page", "profile");
         Subscription subscription = subscriptionRepository.findUserById(
                 user.getId()
         );
 
+        Buddy buddy = buddyRepository.findByUserID(user.getId());
+        List<String> usersIDs = buddy.getBuddiesIds().stream().map(BuddyConnectionRequest::getUserId).toList();
+        List<UserFitbuddy> friends = userRepository.getByUserIds(usersIDs);
+
+        ArrayList<String> PendingUsersIDs = new ArrayList<>();
+        for (BuddyConnectionRequest b : buddy.getBuddiesIds()) {
+            if (b.getApproved() == null) {
+                PendingUsersIDs.add(b.getUserId());
+            }
+        }
+
         model.addAttribute("page","profile");
         model.addAttribute("user", user);
+        model.addAttribute("buddies", friends);
         model.addAttribute("subscription", subscription);
 
-        return "app/profile";
-    }
-
-    @GetMapping(path = "app/settings")
-    public String SettingsPageLoader(Model model) {
-        model.addAttribute("page", "settings");
         return "app/profile";
     }
 }
