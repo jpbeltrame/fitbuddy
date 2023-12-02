@@ -17,11 +17,10 @@
         <!-- Coluna da Esquerda - Settings -->
         <div class="col-md-4">
             <ul class="list-group" id="settingsList">
-                <li class="list-group-item"><a href="?section=profile">Profile</a></li>
-                <li class="list-group-item"><a href="?section=buddies">buddies</a></li>
-                <li class="list-group-item">Support</li>
-                <li class="list-group-item">Subscriptions</li>
-                <li class="list-group-item">Logoff</li>
+                <li class="list-group-item"><a href="?section=profile">Profile Details</a></li>
+                <li class="list-group-item"><a href="?section=buddies">Buddies List</a></li>
+                <li class="list-group-item"><a href="?section=support">Support</a></li>
+                <li class="list-group-item"><a href="?section=subscription">Subscription Details</a></li>
             </ul>
         </div>
         <div class="col-md-8"  th:if="${#strings.isEmpty(param.section) || #strings.equals(param?.section, 'profile')}">
@@ -49,6 +48,23 @@
                     </ul>
                     <br>
                     <p class="card-text"><strong>Badges Owned:</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#strings.equals(param?.section, 'subscription')}" class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Subscription Details</h2>
+                    <p class="card-text"><strong>Type:</strong> <span
+                            th:text="${user.getSubscriptionType()}"></span></p>
+                    <p class="card-text"><strong>Value:</strong> <span
+                            th:text="${subscription.getPrice()}"></span></p>
+                    <p class="card-text"><strong>Subscribed At:</strong> <span
+                            th:text="${subscription.getSubscribedAt()}"></span></p>
+                    <p class="card-text"><strong>Charge Day:</strong> <span
+                            th:text="${subscription.getChargeDay()}"></span></p>
+
                 </div>
             </div>
         </div>

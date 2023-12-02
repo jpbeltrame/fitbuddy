@@ -14,4 +14,10 @@ public class AdminController {
         model.addAttribute("page", "adminPage");
         return "app/adminPage";
     }
+
+//    @PostMapping(path = "admin")
+//    public String adminPageLoader(Model model) {
+//        model.addAttribute("page", "adminPage");
+//        return "app/adminPage";
+//    }
 }
