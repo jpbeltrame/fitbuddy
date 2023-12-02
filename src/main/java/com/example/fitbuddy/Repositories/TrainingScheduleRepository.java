@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TrainingScheduleRepository extends MongoRepository<TrainingSchedule, String> {
     @Aggregation(pipeline = {
-            "{'$match': {buddiesIds:  '?0'}}",
+            "{'$match': {'$or' : [{buddiesIds:  '?0'}, {ownerUserId:  '?0'}]}}",
             "{'$sort' : { '_id' : 1 } }",
     })
     List<TrainingSchedule> findByBuddyId(String userId);

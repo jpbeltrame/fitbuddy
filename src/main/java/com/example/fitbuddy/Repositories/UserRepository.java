@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserRepository extends MongoRepository<UserFitbuddy, String> {
 
-    @Query("{username:  '?0'}")
+    @Query("{username:  '?0', status: 'active'}")
     UserFitbuddy findUserByEmail(String username);
 
     @Aggregation(pipeline = {

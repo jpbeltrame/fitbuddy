@@ -27,5 +27,6 @@ public class TrainingSchedule  {
     private LocalDate date;
     private LocalTime startAt;
     private LocalTime endAt;
+    private String ownerUserId;
 }
 

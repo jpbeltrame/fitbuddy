@@ -1,4 +1,4 @@
-<form th:fragment="preferencesForm(action, showGenderPrefix)" th:action="${action}" th:method="'POST'">
+<form id="formPreferencesForm" th:fragment="preferencesForm(action, showGenderPrefix)" th:action="${action}" th:method="'POST'">
     <div class="row my-2">
         <div class="col">
             <label for="genderFilter"><span th:if="${showGenderPrefix}">Your </span>Gender:</label>
@@ -9,9 +9,8 @@
             </select>
         </div>
     </div>
-
     <div class="row my-3">
-        <div class="col">
+        <div class="col" id="weekdasys" >
             <label>Training Days Options:</label>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" name="trainingDays" id="mondayCheckbox" value="monday" style="color: #212529">
@@ -35,7 +34,6 @@
             </div>
         </div>
     </div>
-
     <div class="row my-3">
         <div class="col">
             <label for="objectiveFilter">Pick a objective:</label>
@@ -51,8 +49,6 @@
             </select>
         </div>
     </div>
-
-
     <div class="row my-3">
         <label>Available time for training sessions:</label>
         <div class="col">
@@ -65,16 +61,13 @@
                 <small>Start</small>
             </label>
         </div>
-
         <div class="col">
-
             <input class="form-control"
                    type="time"
                    id="endSession"
                    name="endSession"
                   />
             <label for="endSession">
-
                 <small>End</small>
             </label>
         </div>
@@ -86,12 +79,27 @@
 <!--    </div>-->
     <div class="row my-3">
         <button
+                onclick="formHandler(event)"
                 class="btn"
                 id="subscribeBtn"
-                type="submit"
+                type="button"
                 style="background: #31C48D6F"
         >
             Submit
         </button>
     </div>
+    <script defer>
+        function formHandler(event) {
+            const valid = document
+                .getElementById("formPreferencesForm")
+                .querySelectorAll("input[name=trainingDays]:checked")
+                .length > 0;
+
+            if (!valid) {
+                alert("Please select at least one training day");
+            } else {
+                document.getElementById("formPreferencesForm").submit();
+            }
+        }
+    </script>
 </form>

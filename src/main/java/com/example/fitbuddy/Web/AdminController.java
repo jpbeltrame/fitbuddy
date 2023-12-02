@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class AdminController {
 
-    @GetMapping(path = "app/adminPage")
+    @GetMapping(path = "admin")
     public String adminPageLoader(Model model) {
         model.addAttribute("page", "adminPage");
         return "app/adminPage";
     }
-
-
 }

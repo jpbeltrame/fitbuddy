@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
     <title>FitBuddy | Admin</title>
@@ -9,7 +10,7 @@
 <body>
 <section th:replace="fragments/navbar.html :: app-navbar(activePage = ${page})"></section>
 
-<div id="demo" class="carousel slide" data-bs-ride="carousel">
+<div sec:authorize="hasAuthority('USER')" id="demo" class="carousel slide" data-bs-ride="carousel">
 
     <!-- Indicators/dots -->
     <div class="carousel-indicators">

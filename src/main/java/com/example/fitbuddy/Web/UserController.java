@@ -2,9 +2,9 @@ package com.example.fitbuddy.Web;
 
 import com.example.fitbuddy.DTO.SignupForm;
 import com.example.fitbuddy.DTO.FindABuddyForm;
-import com.example.fitbuddy.Entities.Subscription;
-import com.example.fitbuddy.Entities.UserFitbuddy;
-import com.example.fitbuddy.Entities.UserPreferences;
+import com.example.fitbuddy.Entities.*;
+import com.example.fitbuddy.Repositories.BuddyRepository;
+import com.example.fitbuddy.Repositories.PersonalTrainerRepository;
 import com.example.fitbuddy.Repositories.SubscriptionRepository;
 import com.example.fitbuddy.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -31,6 +31,8 @@ public class UserController {
     private UserRepository userRepository;
     private SubscriptionRepository subscriptionRepository;
     private PasswordEncoder passwordEncoder;
+    private BuddyRepository buddyRepository;
+    private PersonalTrainerRepository personalTrainerRepository;
 
     @GetMapping(path = "app/signUp")
     public String IndexPageLoader(Model model) {
@@ -84,7 +86,19 @@ public class UserController {
         userFitbuddy.setSubscriptionType(form.subscriptionType);
         userFitbuddy.setUsername(form.username);
         userFitbuddy = userRepository.save(userFitbuddy);
-        subscriptionRepository.save( new Subscription(userFitbuddy.getId(), form.subscriptionType,10));
+
+        if (form.subscriptionType.equals("buddy")) {
+            Buddy buddy = new Buddy();
+            buddy.setUserId(userFitbuddy.getId());
+            buddyRepository.save(buddy);
+        } else {
+            PersonalTrainer personal = new PersonalTrainer();
+            personal.setUserId(userFitbuddy.getId());
+            personalTrainerRepository.save(personal);
+        }
+        subscriptionRepository.save(
+                new Subscription(userFitbuddy.getId(), form.subscriptionType,10)
+        );
 
         return "app/index";
     }
@@ -112,23 +126,11 @@ public class UserController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
     public String FindBuddyHandler(FindABuddyForm form, Model model) {
-
-        System.out.println("---------Trainning days: " + Arrays.toString(form.getTrainingDays()));
-        System.out.println("---------Start session: " + form.getStartSession());
-        System.out.println("---------End session: " + form.getEndSession());
-
-
         String errorField = "";
         String errorMessage = "";
 
         List<UserFitbuddy> users = userRepository.findUserByGender(form.getGender());
         model.addAttribute("users", users);
-
-        for (UserFitbuddy u: users) {
-            System.out.println(u.getName());
-        }
-
-        System.out.println("---------Size: " + users.size());
 
         if (form.getTrainingDays().length == 0) {
             errorField = "trainingDays";

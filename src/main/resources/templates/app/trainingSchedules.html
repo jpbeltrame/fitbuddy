@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <title>FitBuddy | Index</title>
     <th:block th:replace="fragments/import.html :: headerfiles"></th:block>
@@ -42,7 +44,7 @@
                     <a th:href="${'/app/schedules/'+ trainingSchedule.getId()}" class="btn btn-outline-secondary">
                         <i class="fa-regular fa-eye"></i>
                     </a>
-                    <form th:action="${'/app/schedules/' + trainingSchedule.getId()+ '/delete'}" method="post">
+                    <form th:if="${#strings.equals(trainingSchedule.getOwnerUserId(), user.getId())}" th:action="${'/app/schedules/' + trainingSchedule.getId()+ '/delete'}" method="post">
                         <button type="submit" class="mx-1 btn btn-outline-danger">
                             <i class="fa-solid fa-file-circle-minus"></i>
                         </button>
@@ -51,7 +53,7 @@
             </li>
         </ul>
         <div th:unless="${trainingSchedules.size() > 0}" class="alert alert-warning">
-            <i class="fa-solid fa-triangle-exclamation"></i> Ops... looks like you don't have a schedule yet, create one now!
+            <i class="fa-solid fa-triangle-exclamation"></i> Looks like you don't have a schedule yet, create one now!
         </div>
     </div>
 </div>

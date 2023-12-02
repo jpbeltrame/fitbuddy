@@ -49,7 +49,7 @@ public class WebSecurityConfig {
                         ).permitAll()
                         .requestMatchers(
                                 "/admin/**"
-                        ).hasRole("admin")
+                        ).hasAuthority("admin")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

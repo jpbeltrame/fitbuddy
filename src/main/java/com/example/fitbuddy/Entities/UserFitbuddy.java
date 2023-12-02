@@ -26,4 +26,6 @@ public class UserFitbuddy {
     private String location;
     private String subscriptionType;
     private UserPreferences preferences;
+    private String status = "active";
+    private String role = "user";
 }

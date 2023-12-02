@@ -30,10 +30,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserFitbuddy userFitbuddy = userRepository.findUserByEmail(username);
 
-        //TO-DO fix roles
-        List<String> list = Arrays.asList("user", "temp");
-
         if (userFitbuddy != null) {
+            List<String> list = new LinkedList<>();
+            list.add(userFitbuddy.getRole());
+
             return new User(
                     userFitbuddy.getUsername(),
                     userFitbuddy.getPassword(),

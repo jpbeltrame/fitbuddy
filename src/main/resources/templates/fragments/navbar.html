@@ -1,3 +1,5 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <header class="p-3 text-bg-dark" th:fragment="site-navbar(activePage)">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -68,8 +70,10 @@
                 </li>
             </ul>
             <div class="text-end">
+                <a sec:authorize="hasAuthority('admin')" th:href="@{/admin}" class="btn btn-danger">Admin area</a>
                 <a th:href="@{/app/logout}" class="btn btn-warning">Logout</a>
             </div>
         </div>
     </div>
 </header>
+</html>

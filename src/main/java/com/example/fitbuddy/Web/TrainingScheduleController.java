@@ -31,6 +31,7 @@ public class TrainingScheduleController {
         UserFitbuddy user = userRepository.findUserByEmail(authentication.getName());
         List<TrainingSchedule> trainingSchedules = trainingScheduleRepository.findByBuddyId(user.getId());
 
+        model.addAttribute("user", user);
         model.addAttribute("page", "schedules");
         model.addAttribute("trainingSchedules", trainingSchedules);
         return "app/trainingSchedules";
@@ -43,10 +44,9 @@ public class TrainingScheduleController {
     }
 
     @GetMapping(path = "/app/schedules/{id}")
-    public String GetTariningSchedule(@PathVariable String id, Model model){
+    public String GetTariningSchedule(@PathVariable String id, Model model, Authentication authentication){
 
         TrainingSchedule trainingSchedule = trainingScheduleRepository.getById(id);
-
         if(trainingSchedule == null) {
             return "redirect:/app/schedules?notfound="+id;
         }
@@ -64,11 +64,9 @@ public class TrainingScheduleController {
         TrainingSchedule trainingSchedule = new TrainingSchedule();
 
         UserFitbuddy user = userRepository.findUserByEmail(authentication.getName());
-        ArrayList<String> userIds = new ArrayList<String>();
-        userIds.add(user.getId());
 
-//        trocar para buddies id depois
-        trainingSchedule.setBuddiesIds(userIds);
+        trainingSchedule.setOwnerUserId(user.getId());
+        trainingSchedule.setBuddiesIds(new ArrayList<String>());
         trainingSchedule.setTitle(form.getTitle());
         trainingSchedule.setLocation(form.getLocation());
         trainingSchedule.setStartAt(form.getStartAt());
